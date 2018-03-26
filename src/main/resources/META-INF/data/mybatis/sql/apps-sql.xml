@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="apps">
+
+	<select id="countApiKey" parameterType="String" resultType="int">
+		select 
+			count(*) 
+		from 
+			tn_apps
+		where 
+			api_key = #{api_key}
+	</select>
+	
+	<insert id="insertApps" parameterType="Apps">
+		insert into tn_apps(
+			api_key, 
+			member_id, 
+			api_allow,
+			reg_dt,
+			mod_dt,
+			app_name,
+			description,
+			api_seq
+		)
+		values(
+			#{api_key}, 
+			#{member_id}, 
+			#{api_allow},
+			sysdate,
+			sysdate,
+			#{app_name},
+			#{description},
+			#{api_seq}
+		)
+	</insert>
+	
+	<select id="selectAllApps" parameterType="String" resultType="Apps">
+		select 
+			a.api_key, 
+			a.api_allow, 
+			a.reg_dt, 
+			a.mod_dt, 
+			a.app_name, 
+			a.use_yn, 
+			a.description, 
+			a.api_seq, 
+			b.call_count,
+			c.api_name_kor
+		from 
+			tn_apps a, 
+			tn_api_quota b,
+			tn_api_list c
+		where 
+			a.member_id = #{member_id}
+		and a.api_key = b.api_key
+		and	b.api_seq = c.api_seq
+		order by a.reg_dt asc
+	</select>
+	<select id="selectApp" parameterType="String" resultType="Apps">
+		select 			
+			api_allow,
+			app_name, 
+			use_yn, 
+			description,
+			api_key
+		from 
+			tn_apps
+		where 
+			api_key = #{api_key}
+	</select>
+	
+	<update id="updateApp" parameterType="Apps">
+		update
+			tn_apps 
+		set 			
+			api_allow =#{api_allow},
+			app_name =#{app_name}, 
+			use_yn =#{use_yn}, 
+			description = #{description},
+			mod_dt = sysdate
+		where 
+			api_key = #{api_key}
+	</update>
+
+	<select id="selectApiList" parameterType="String" resultType="ApiList">
+	 <![CDATA[
+		select *
+		from 
+			tn_api_list
+		where 
+			permission_level >= #{permission_level}
+		order by api_seq asc
+	]]>
+	</select>
+	<insert id="insertApiQuota" parameterType="Apps">
+		insert into tn_api_quota(
+			API_KEY, 
+			API_SEQ, 
+			CALL_COUNT
+			)
+		values(
+			#{api_key}, 
+			(select api_seq from tn_apps where api_key = #{api_key}),
+			0
+		)
+	</insert>
+	
+	<select id="appUsrCheck" parameterType="hashmap" resultType="int">
+		select 			
+			count(*)
+		from 
+			tn_apps
+		where 
+			api_key = #{api_key}
+		and	member_id = #{member_id}
+			
+	</select>	 
+	
+	<select id="thisKeyCorrect" parameterType="hashmap" resultType="int">
+		select 			
+			count(*)
+		from 
+			TN_APPS
+		where 
+			API_KEY = #{apiKey}
+		AND	API_SEQ = #{apiSeq}
+		AND USE_YN = 'Y'
+	</select>	
+	
+	<select id="selectAllowInfo" parameterType="String" resultType="hashmap">
+		SELECT 			
+			A.PERMISSION_LEVEL, 
+            B.API_ALLOW 
+		FROM 
+                TN_MEMBER A, 
+               (SELECT MEMBER_ID, API_ALLOW FROM  TN_APPS WHERE API_KEY =#{api_key}) B   
+		WHERE 
+			A.ID = B.MEMBER_ID
+	</select>	
+	<select id="selectCallCount" parameterType="String" resultType="int">
+		SELECT 
+			CALL_COUNT 
+		FROM 
+			TN_API_QUOTA 
+		WHERE 
+			API_KEY =#{api_key}
+	</select>
+	
+	<update id="callCount" parameterType="String">
+		update 
+			tn_api_quota 
+		set 
+			call_count= call_count+1 
+        where 
+        	api_key = #{api_key}
+	</update>
+	
+</mapper>

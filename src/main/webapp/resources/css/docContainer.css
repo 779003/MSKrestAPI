@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+.apiContents {
+	padding-top: 60px;
+}
+
+.docContents {
+	border-radius: .25rem;
+	padding: .75rem 1rem;
+	background-color: #f8f8f8;
+	width: 80%;
+	/* text-align: center; */
+	text-align: left;
+	display: inline-block;
+}
+
+.docContents h1, h2 {
+	margin-left: -1em;
+	font-weight: bold;
+	border-radius: .25rem;
+	background-color: #d7d7d7;
+	padding: 0.2em;
+}
+
+#container {
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.tab {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+/* Float the list items side by side */
+.tab li {
+	float: left;
+}
+/* Style the links inside the list items */
+.tab li a {
+	display: inline-block;
+	color: #000;
+	text-align: center;
+	text-decoration: none;
+	padding: 14px 16px;
+	font-size: 17px;
+	transition: 0.3s;
+}
+/* Style the tab content */
+.tabcontent {
+	display: none;
+	background-color: rgb(230, 234, 255);
+	padding: 6px 12px;
+}
+
+ul.tab li.current {
+	background-color: rgb(230, 234, 255);
+	color: #222;
+}
+
+.tabcontent.current {
+	display: block;
+}
+
+.appInfoTable {
+	border: 5px;
+}
+
+.appInfoTable th {
+	padding: 3px;
+	background-color: rgb(212, 237, 218);
+	border-radius: 0.5rem;
+}
+
+.appInfoTable td {
+	padding: 3px;
+	background-color: rgb(247, 236, 202);
+	border-radius: 0.5rem;
+}

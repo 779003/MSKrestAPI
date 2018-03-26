@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Member" type="com.mskim.backendservice.member.vo.MemberVo" /> 
+		<typeAlias alias="Apps" type="com.mskim.frontendService.apps.vo.AppsVo" /> 
+		<typeAlias alias="ApiList" type="com.mskim.frontendService.apps.vo.ApiListVo" /> 
+		<typeAlias alias="Log" type="com.mskim.backendservice.common.log.vo.LogVo" /> 
+	</typeAliases>
+	<mappers>
+	 	<mapper resource="META-INF/data/mybatis/sql/member-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/login-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/apps-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/log-sql.xml" /> 
+	</mappers>
+</configuration>

@@ -24,7 +24,7 @@ import com.mskim.backendservice.member.vo.MemberVo;
  * Produces는 Accept 헤더를 참고 
  * Consumes은 Content-Type 헤더를 참고
  * 출처 : http://www.mimul.com/pebble/default/2010/05/01/1272710220000.html
- * 
+ * .
  * */
 
 @Controller

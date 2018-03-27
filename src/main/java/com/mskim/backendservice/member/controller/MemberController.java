@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.google.gson.Gson;
 import com.mskim.backendservice.common.Code;
@@ -27,7 +28,7 @@ import com.mskim.backendservice.member.vo.MemberVo;
  * .
  * */
 
-@Controller
+@RestController
 @RequestMapping(value = "/{version}/admin")
 public class MemberController{
 
@@ -54,7 +55,6 @@ public class MemberController{
 	 * @return 멤버 목록
 	 */
 	
-	@ResponseBody
 	@RequestMapping(value = "/members", 
 					method = RequestMethod.GET, 
 					produces = "application/json; charset=utf8")
@@ -113,7 +113,6 @@ public class MemberController{
 	 *            {@link MemberVo} 멤버 VO
 	 * @return 멤버
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/members/{id}", 
 					method = RequestMethod.GET, 
 					produces = "application/json; charset=utf8")
@@ -178,7 +177,6 @@ public class MemberController{
 	 * @param memberVo
 	 *            {@link MemberVo} 멤버 VO
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/members", 
 					method = RequestMethod.POST, 
 					produces = "application/json; charset=utf8", consumes = "application/json")
@@ -232,7 +230,6 @@ public class MemberController{
 	 * @param memberVo
 	 *            {@link MemberVo} 멤버 VO
 	 */
-	@ResponseBody
 	@RequestMapping(value = "/members/{id}", 
 					method = RequestMethod.DELETE, 
 					produces = "application/json; charset=utf8")
@@ -285,7 +282,6 @@ public class MemberController{
 	 *            {@link MemberVo} 멤버 VO - json 타입으로 받기
 	 */
 
-	@ResponseBody
 	@RequestMapping(value = "/members/{id}", 
 					method = RequestMethod.PUT, 
 					produces = "application/json; charset=utf8", 

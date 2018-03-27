@@ -62,7 +62,6 @@ public class MemberController{
 			HttpServletResponse response, MemberVo requestUrl,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
         
-        response.setHeader("Access-Control-Allow-Origin", "*");
 		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
 
 		if(apikey == null){
@@ -120,7 +119,6 @@ public class MemberController{
 			HttpServletResponse response, MemberVo requestUrl,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
 		
 		if(apikey == null){
@@ -185,7 +183,6 @@ public class MemberController{
 			@RequestBody MemberVo memberVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
 
 		if(apikey == null){
@@ -237,7 +234,6 @@ public class MemberController{
 			HttpServletResponse response, MemberVo requestUrl,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
 
 		if(apikey == null){
@@ -291,7 +287,6 @@ public class MemberController{
 			@RequestBody MemberVo memberVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		response.setHeader("Access-Control-Allow-Origin", "*");
 		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
 		
 		if(apikey == null){

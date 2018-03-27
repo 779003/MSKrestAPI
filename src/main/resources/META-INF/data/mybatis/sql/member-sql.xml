@@ -4,11 +4,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="member">
 
-	<select id="selectMembers" parameterType="Member" resultType="Member">
+	<select id="selectMembers" parameterType="String" resultType="Member">
 		select id, name, gender from tn_member 
 		where 1=1
-		<if test="gender != null and gender != ''">
-		and gender = #{gender}
+		<if test="value != null and value != ''">
+		and gender = #{value}
 		</if>
 	</select>
 

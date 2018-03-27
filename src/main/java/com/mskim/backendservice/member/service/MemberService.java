@@ -48,13 +48,13 @@ public class MemberService implements ApiServiceInterface {
 		return memberDao.selectMembers();
 	}
 	/**
-	 * 여러 멤버 조회 버전2
-	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * 여러 멤버 조회 버전2 (성별로 구분)
+	 * @param String gender 성별
 	 * @return 멤버 목록
 	 */
-	public List<MemberVo> selectMembers(MemberVo memberVo) {
+	public List<MemberVo> selectMembers(String gender) {
 		
-		return memberDao.selectMembers(memberVo);
+		return memberDao.selectMembers(gender);
 	}
 
 	/**

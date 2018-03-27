@@ -96,7 +96,7 @@ public class MemberController{
 				case VERSION_2:
 					logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
 					memberService.callCount(apikey);
-					return gson.toJson(memberService.selectMembers(requestUrl));				
+					return gson.toJson(memberService.selectMembers(requestUrl.getGender()));				
 				
 				default:
 					logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");

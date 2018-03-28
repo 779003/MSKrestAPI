@@ -34,10 +34,6 @@ public class AppsController {
 	@RequestMapping(value="")
 	public String appManagementMain(Model model, HttpSession session){
 		
-		if(loginService.getLoginMember(session) == null){
-			return "redirect:/usr/login?currUrl=/apps";
-		}
-		
 		String memberPermissionLevel = loginService.getLoginMember(session).getPermission_level();
 		
 		int maxQuota = 0;
@@ -66,9 +62,6 @@ public class AppsController {
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public String appRegisterPage(Model model, HttpSession session){
 		
-		if(loginService.getLoginMember(session) == null){
-			return "redirect:/usr/login?currUrl=/apps/register";
-		}
 		model.addAttribute("ssMemberId",loginService.getLoginMember(session).getId());
 		model.addAttribute("api_list", appsService.selectApiList(loginService.getLoginMember(session).getPermission_level()));
 		model.addAttribute("category1", "Open API 사용 관리");
@@ -83,11 +76,6 @@ public class AppsController {
 	
 	@RequestMapping(value="/register", method = RequestMethod.POST)
 	public String appRegister(Model model, HttpSession session, AppsVo appsVo){
-		
-		
-		if(loginService.getLoginMember(session) == null){
-			return "redirect:/usr/login?currUrl=/apps";
-		}
 
 		appsVo.setMember_id(loginService.getLoginMember(session).getId());
 		appsVo.setApi_key(apiKeyService.makeApiKey());
@@ -102,16 +90,13 @@ public class AppsController {
 	@RequestMapping(value="/modify/{apiKey}", method = RequestMethod.GET)
 	public String modifyAppPage(HttpSession session, Model model, @PathVariable String apiKey){
 		
-		if(loginService.getLoginMember(session) == null){
-			return "redirect:/usr/login?currUrl=/apps";
-		}
-		
 		String memberId = loginService.getLoginMember(session).getId();
 
 		HashMap<String, String> usrInfo = new HashMap<String, String>();
 		usrInfo.put("api_key", apiKey);
 		usrInfo.put("member_id", memberId);
 		
+		//TODO 잘못된사용자임을 안내하는 에러페이지로 리다이렉트 처리 (다른유저 수정페이지로 접근 방지)
 		if(appsService.appUsrCheck(usrInfo) == 0){
 			return "redirect:/apps";
 		}
@@ -130,10 +115,6 @@ public class AppsController {
 	}
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
 	public String modifyApp(HttpSession session, AppsVo appsVo){
-		
-		if(loginService.getLoginMember(session) == null){
-			return "redirect:/usr/login?currUrl=/apps";
-		}
 		
 		String memberId = loginService.getLoginMember(session).getId();
 

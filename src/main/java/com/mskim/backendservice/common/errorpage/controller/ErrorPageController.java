@@ -21,7 +21,7 @@ public class ErrorPageController{
 	@ResponseBody
 	@RequestMapping(value="/400", produces = "application/json; charset=utf8")
 	public String badRequest(){
-		return errorPageService.resultWithCode(Code.BAD_REQUEST);		
+		return errorPageService.resultWithCode(Code.BAD_REQUEST_400);		
 	}
 	@ResponseBody
 	@RequestMapping(value="/404", produces = "application/json; charset=utf8")

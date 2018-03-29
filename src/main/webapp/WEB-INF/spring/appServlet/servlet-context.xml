@@ -30,6 +30,13 @@
 			<beans:bean id="LoginInterceptor" class="com.mskim.frontendService.usr.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>
+
+	<interceptors>
+		<interceptor>
+			<mapping path="/*/admin/members/**"/>
+			<beans:bean id="LogInterceptor" class="com.mskim.backendservice.common.log.interceptor.LogInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	<context:component-scan base-package="com.mskim.backendservice" />
 	<context:component-scan base-package="com.mskim.frontendService" />

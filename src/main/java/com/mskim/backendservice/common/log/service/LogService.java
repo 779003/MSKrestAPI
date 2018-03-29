@@ -10,33 +10,29 @@ import com.mskim.backendservice.common.log.vo.LogVo;
 public class LogService {
 
 	@Autowired
-	LogDao logDao;	
+	LogDao logDao;
 
-	public void insertLog(HttpServletRequest request, String success, String apikey, String API_SEQ, String errorCode, String logType){
-		
-		LogVo logVo = new LogVo();
-		logVo.setApi_key(apikey);
-		logVo.setSuccess(success);
-		logVo.setApi_seq(API_SEQ);
-		logVo.setLog_type(logType);
-		
-		if(request.getHeader("accept_time") != null){
-			logVo.setAccept_time(request.getHeader("accept_time"));
-		}
-		if(request.getHeader("referer") != null){		
+	public void insertLog(HttpServletRequest request, LogVo logVo) {
+
+		if (request.getHeader("referer") != null) {
 			logVo.setReferer(request.getHeader("referer"));
 		}
-		if(request.getRemoteHost() != null){		
+		if (request.getRemoteHost() != null) {
 			logVo.setRemote_host(request.getRemoteHost());
 		}
-		if(request.getRequestURI() != null){			
-			logVo.setRequest_url(request.getRequestURI());		
+		if (request.getRequestURI() != null) {
+			logVo.setRequest_url(request.getRequestURI());
 		}
-		if(errorCode != null){
-			logVo.setError_code(errorCode);
+
+		try {
+
+			logDao.insertLog(logVo);
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
 		}
-		
-		logDao.insertLog(logVo);
+
 	}
-	
+
 }

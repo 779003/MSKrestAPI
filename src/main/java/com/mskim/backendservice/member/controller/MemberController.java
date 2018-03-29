@@ -5,18 +5,19 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.mskim.backendservice.common.Code;
 import com.mskim.backendservice.common.Version;
 import com.mskim.backendservice.common.log.service.LogService;
+import com.mskim.backendservice.common.log.vo.LogVo;
 import com.mskim.backendservice.member.service.MemberService;
 import com.mskim.backendservice.member.vo.MemberVo;
 
@@ -40,8 +41,8 @@ public class MemberController{
 	@Autowired
 	MemberService memberService;
 	
-	@Autowired
-	LogService logService;
+	/*@Autowired
+	LogService logService;*/
 		
 	Gson gson = new Gson();
 	
@@ -72,33 +73,53 @@ public class MemberController{
 		}else if (requestVersion == null) {
 			
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 		}
 
 		int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
 		if(viewsCount < 0){ //결과가 음수일 경우 코드값
-			
+			//TODO 배드 리퀘스트가 아닌듯
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
 			
 		}else if(viewsCount == 0){
 			
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.EXCEEDED_CALL);
 		}else{
-
+			LogVo logInfo;
 			switch (requestVersion) {			
 				case VERSION_1:
-					logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
+					logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+					request.setAttribute("logInfo", logInfo);					
 					memberService.callCount(apikey);
 					return gson.toJson(memberService.selectMembers());
 					
 				case VERSION_2:
-					logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
-					memberService.callCount(apikey);
-					return gson.toJson(memberService.selectMembers(requestUrl.getGender()));				
+					
+					if(requestUrl.getGender() == null) {
+						
+						response.setStatus(HttpStatus.BAD_REQUEST.value());
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST.getCode(), "API_USE");
+						request.setAttribute("logInfo", logInfo);
+						return memberService.resultWithCode(Code.BAD_REQUEST);
+						
+					}else {
+						
+						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+						request.setAttribute("logInfo", logInfo);
+						memberService.callCount(apikey);
+						return gson.toJson(memberService.selectMembers(requestUrl.getGender()));	
+					}
 				
 				default:
-					logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+					request.setAttribute("logInfo", logInfo);					
 					response.setStatus(HttpStatus.BAD_REQUEST.value());
 					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			}
@@ -129,7 +150,8 @@ public class MemberController{
 		}else if (requestVersion == null) {
 					
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			
 		}
@@ -137,31 +159,38 @@ public class MemberController{
 		int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
 		if(viewsCount < 0){ //결과가 음수일 경우 코드값
 			
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
 			
 		}else if(viewsCount == 0){
 			
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.EXCEEDED_CALL);
 			
 		}else{
-				
+			LogVo logInfo;
 				switch (requestVersion) {
 					case VERSION_1:						
 						if (memberService.alreadyHasId(requestUrl.getId())) {
 							
-							logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
+							logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+							request.setAttribute("logInfo", logInfo);
 							memberService.callCount(apikey);
 							return gson.toJson(memberService.selectMember(requestUrl));					
 						
 						}else{
 							
-							logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_ID.getCode(), "API_USE");
+							logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_ID.getCode(), "API_USE");
+							request.setAttribute("logInfo", logInfo);
 							response.setStatus(HttpStatus.BAD_REQUEST.value());
 							return memberService.resultWithCode(requestUrl, Code.NO_ID);
 						}
 			
 					default:
-						logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.NOT_FOUND.value());
 						return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 					}
@@ -193,28 +222,34 @@ public class MemberController{
 		}else if (requestVersion == null) {
 					
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			
 		}else{
-			
+			LogVo logInfo;
 			memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode())); 
 			switch (requestVersion) {
 			
 				case VERSION_1:					
 					if (memberService.alreadyHasId(memberVo.getId())) {
-						logService.insertLog(request, "F", apikey, API_SEQ, Code.DUPLICATED_ID.getCode(), "API_USE");
+						
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.DUPLICATED_ID.getCode(), "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
 						return memberService.resultWithCode(memberVo, Code.DUPLICATED_ID);
 					} else {
-						logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
+						
+						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						memberService.insertMember(memberVo);
 						response.setStatus(HttpStatus.CREATED.value());
 						return memberService.resultWithCode(memberVo, Code.INSERT_ID);
 					}
 					
 				default:
-					logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
 					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			}
@@ -244,27 +279,31 @@ public class MemberController{
 		}else if (requestVersion == null) {
 					
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			
 		}else{
-			
+			LogVo logInfo;
 			switch (requestVersion) {			
 				case VERSION_1:
 					if (memberService.alreadyHasId(requestUrl.getId())) {
 						
-						logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
+						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						memberService.deleteMember(requestUrl);
 						return memberService.resultWithCode(requestUrl, Code.DELETE_ID);
 						
-					} else {						
-						logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_ID.getCode(), "API_USE");
+					} else {	
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_ID.getCode(), "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
 						return memberService.resultWithCode(requestUrl, Code.NO_ID);
 					}
 					
 				default:
-					logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
 					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			}
@@ -297,34 +336,43 @@ public class MemberController{
 		}else if (requestVersion == null) {
 					
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 			
 		}else{
 
 			if (!requestUrl.getId().equals(memberVo.getId())) {
 				
-				logService.insertLog(request, "F", apikey, API_SEQ, Code.BAD_REQUEST2.getCode(), "API_USE");
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST2.getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST2);
 			}
-
-			switch (requestVersion) {			
+			
+			LogVo logInfo;
+			switch (requestVersion) {
+			
 				case VERSION_1:	
 					if (memberService.alreadyHasId(memberVo.getId())) {
-						logService.insertLog(request, "S", apikey, API_SEQ, null, "API_USE");
 						
+						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						memberService.updateMember(memberVo);
 						return memberService.resultWithCode(memberVo, Code.UPDATE_ID);
 						
 					} else {
-						logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_ID.getCode(), "API_USE");
+						
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_ID.getCode(), "API_USE");
+						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
 						return memberService.resultWithCode(memberVo, Code.NO_ID);
 					}
 					
 				default:
-					logService.insertLog(request, "F", apikey, API_SEQ, Code.NO_VERSION.getCode(), "API_USE");
+					
+					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
 					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
 				}

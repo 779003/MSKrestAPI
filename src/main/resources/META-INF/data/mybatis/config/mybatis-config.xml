@@ -5,12 +5,14 @@
 <configuration>
 	<typeAliases>
 		<typeAlias alias="Member" type="com.mskim.backendservice.member.vo.MemberVo" /> 
+		<typeAlias alias="Fish" type="com.mskim.backendservice.fish.vo.FishVo" /> 
 		<typeAlias alias="Apps" type="com.mskim.frontendService.apps.vo.AppsVo" /> 
 		<typeAlias alias="ApiList" type="com.mskim.frontendService.apps.vo.ApiListVo" /> 
 		<typeAlias alias="Log" type="com.mskim.backendservice.common.log.vo.LogVo" /> 
 	</typeAliases>
 	<mappers>
 	 	<mapper resource="META-INF/data/mybatis/sql/member-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/fish-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/login-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/apps-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/log-sql.xml" /> 

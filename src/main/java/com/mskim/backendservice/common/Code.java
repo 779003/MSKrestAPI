@@ -8,6 +8,9 @@ import lombok.Getter;
 @Getter
 public enum Code {
 	
+	
+	OK("200", "작업을 성공하였습니다."),
+	
 		/*파라미터 문제*/
 	NO_VERSION("1001", "유효하지 않은 버전입니다. 버전을 확인해주세요."), 
 	NO_SERVICE_VERSION("1002", "준비 중인 버전입니다."), 

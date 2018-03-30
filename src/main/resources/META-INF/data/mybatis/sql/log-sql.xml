@@ -4,25 +4,23 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="log">
 
-
-	
 	<insert id="insertLog" parameterType="Log">
-		insert into TN_API_LOG(
-			API_KEY,
-			API_SEQ,
-			REFERER,
-			ACCEPT_TIME,
-			SUCCESS,
-			REMOTE_HOST,
-			REQUEST_URL,
-			ERROR_CODE,
-			LOG_TYPE
+		INSERT INTO tn_api_log(
+			api_key,
+			api_seq,
+			referer,
+			accept_time,
+			success,
+			remote_host,
+			request_url,
+			error_code,
+			log_type
 		)
-		values(
+		VALUES(
 			#{api_key},   
 			#{api_seq},   
 			#{referer},   
-			sysdate,
+			SYSDATE,
 			#{success},   
 			#{remote_host},
 			#{request_url},

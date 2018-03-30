@@ -5,38 +5,67 @@
 <mapper namespace="member">
 
 	<select id="selectMembers" parameterType="String" resultType="Member">
-		select id, name, gender from tn_member 
-		where 1=1
+		SELECT 
+			  id
+			, name
+			, gender 
+		FROM 
+			tn_member 
+		WHERE 1=1
 		<if test="value != null and value != ''">
-		and gender = #{value}
+		AND gender = #{value}
 		</if>
 	</select>
 
 	<select id="selectMember" parameterType="String" resultType="Member">
-		select id, name, gender, permission_level  
-		from tn_member	
-		where 	
-		id = #{value}
+		SELECT 
+			  id
+			, name
+			, gender
+			, permission_level  
+		FROM 
+			tn_member	
+		WHERE 	
+			id = #{value}
 	</select>
 
 	<insert id="insertMember" parameterType="Member">
-		insert into tn_member(id, name, gender, password)
-		values(#{id}, #{name}, #{gender}, #{password})
+		INSERT INTO 
+			tn_member(
+				  id
+				, name
+				, gender
+				, password)
+		VALUES(
+			  #{id}
+			, #{name}
+			, #{gender}
+			, #{password})
 	</insert>
 
 	<delete id="deleteMember" parameterType="String">
-		delete from tn_member where id =#{id}
+		DELETE FROM 
+			tn_member 
+		WHERE 
+			id =#{id}
 	</delete>
 
 	<update id="updateMember" parameterType="Member">
-		update tn_member set 
-		name = #{name}, 
-		gender = #{gender} 
-		where id = #{id}
+		UPDATE 
+			tn_member 
+		SET 
+			name = #{name}, 
+			gender = #{gender} 
+			where id = #{id}
 	</update>
 	
 	<select id="countId" parameterType="String" resultType="int">
-		select count(*) from tn_member where id = #{id}
+		SELECT 
+			COUNT(*) 
+		FROM 
+			tn_member 
+		WHERE 
+			id = #{id}
 	</select>
 	
 </mapper>

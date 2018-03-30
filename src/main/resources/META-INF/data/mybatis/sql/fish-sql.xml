@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="fish">
+
+	<select id="selectAllFish" parameterType="String" resultType="Fish">
+		SELECT FISH_NAME, FISH_IMGURL, FISH_CONTENT, ORGN_URL FROM TN_FISH 
+	</select>
+
+	<select id="selectFish" parameterType="Member" resultType="Fish">
+		select id, name, gender, permission_level  
+		from TN_FISH
+		where 1=1
+		<if test="id != null and id != ''">
+		and id = #{id}
+		</if>
+		
+	</select>
+
+	<insert id="insertMember" parameterType="Member">
+		insert into tn_member(id, name, gender, password)
+		values(#{id}, #{name}, #{gender}, #{password})
+	</insert>
+
+	<delete id="deleteMember" parameterType="String">
+		delete from tn_member where id =#{id}
+	</delete>
+
+	<update id="updateMember" parameterType="Member">
+		update tn_member set 
+		name = #{name}, 
+		gender = #{gender} 
+		where id = #{id}
+	</update>
+	
+	<select id="countId" parameterType="String" resultType="int">
+		select count(*) from tn_member where id = #{id}
+	</select>
+	
+</mapper>

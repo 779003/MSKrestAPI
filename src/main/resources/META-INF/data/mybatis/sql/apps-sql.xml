@@ -5,16 +5,16 @@
 <mapper namespace="apps">
 
 	<select id="countApiKey" parameterType="String" resultType="int">
-		select 
-			count(*) 
-		from 
+		SELECT 
+			COUNT(*) 
+		FROM 
 			tn_apps
-		where 
+		WHERE 
 			api_key = #{api_key}
 	</select>
 	
 	<insert id="insertApps" parameterType="Apps">
-		insert into tn_apps(
+		INSERT INTO tn_apps(
 			api_key, 
 			member_id, 
 			api_allow,
@@ -24,7 +24,7 @@
 			description,
 			api_seq
 		)
-		values(
+		VALUES(
 			#{api_key}, 
 			#{member_id}, 
 			#{api_allow},
@@ -37,123 +37,123 @@
 	</insert>
 	
 	<select id="selectAllApps" parameterType="String" resultType="Apps">
-		select 
-			a.api_key, 
-			a.api_allow, 
-			a.reg_dt, 
-			a.mod_dt, 
-			a.app_name, 
-			a.use_yn, 
-			a.description, 
-			a.api_seq, 
-			b.call_count,
-			c.api_name_kor
-		from 
-			tn_apps a, 
-			tn_api_quota b,
-			tn_api_list c
-		where 
-			a.member_id = #{member_id}
-		and a.api_key = b.api_key
-		and	b.api_seq = c.api_seq
-		order by a.reg_dt asc
+		SELECT 
+			A.api_key, 
+			A.api_allow, 
+			A.reg_dt, 
+			A.mod_dt, 
+			A.app_name, 
+			A.use_yn, 
+			A.description, 
+			A.api_seq, 
+			B.call_count,
+			C.api_name_kor
+		FROM 
+			tn_apps A, 
+			tn_api_quota B,
+			tn_api_list C
+		WHERE 
+			A.member_id = #{member_id}
+		AND A.api_key = B.api_key
+		AND	B.api_seq = C.api_seq
+		ORDER BY A.reg_dt ASC
 	</select>
 	<select id="selectApp" parameterType="String" resultType="Apps">
-		select 			
+		SELECT 			
 			api_allow,
 			app_name, 
 			use_yn, 
 			description,
 			api_key
-		from 
+		FROM 
 			tn_apps
-		where 
+		WHERE 
 			api_key = #{api_key}
 	</select>
 	
 	<update id="updateApp" parameterType="Apps">
-		update
+		UPDATE
 			tn_apps 
-		set 			
+		SET 			
 			api_allow =#{api_allow},
 			app_name =#{app_name}, 
 			use_yn =#{use_yn}, 
 			description = #{description},
 			mod_dt = sysdate
-		where 
+		WHERE 
 			api_key = #{api_key}
 	</update>
 
 	<select id="selectApiList" parameterType="String" resultType="ApiList">
 	 <![CDATA[
-		select *
-		from 
+		SELECT *
+		FROM 
 			tn_api_list
-		where 
+		WHERE 
 			permission_level >= #{permission_level}
-		order by api_seq asc
+		ORDER BY api_seq ASC
 	]]>
 	</select>
 	<insert id="insertApiQuota" parameterType="Apps">
-		insert into tn_api_quota(
-			API_KEY, 
-			API_SEQ, 
-			CALL_COUNT
+		INSERT INTO tn_api_quota(
+			api_key, 
+			api_seq, 
+			call_count
 			)
-		values(
+		VALUES(
 			#{api_key}, 
-			(select api_seq from tn_apps where api_key = #{api_key}),
+			(SELECT api_seq FROM tn_apps WHERE api_key = #{api_key}),
 			0
 		)
 	</insert>
 	
 	<select id="appUsrCheck" parameterType="hashmap" resultType="int">
-		select 			
-			count(*)
-		from 
+		SELECT 			
+			COUNT(*)
+		FROM 
 			tn_apps
-		where 
+		WHERE 
 			api_key = #{api_key}
-		and	member_id = #{member_id}
+		AND	member_id = #{member_id}
 			
 	</select>	 
 	
 	<select id="thisKeyCorrect" parameterType="hashmap" resultType="int">
-		select 			
-			count(*)
-		from 
-			TN_APPS
-		where 
-			API_KEY = #{apiKey}
-		AND	API_SEQ = #{apiSeq}
-		AND USE_YN = 'Y'
+		SELECT 			
+			COUNT(*)
+		FROM 
+			tn_apps
+		WHERE 
+			api_key = #{apiKey}
+		AND	api_seq = #{apiSeq}
+		AND use_yn = 'Y'
 	</select>	
 	
 	<select id="selectAllowInfo" parameterType="String" resultType="hashmap">
 		SELECT 			
-			A.PERMISSION_LEVEL, 
-            B.API_ALLOW 
+			A.permission_level, 
+            B.api_allow 
 		FROM 
-                TN_MEMBER A, 
-               (SELECT MEMBER_ID, API_ALLOW FROM  TN_APPS WHERE API_KEY =#{api_key}) B   
+                tn_member A, 
+               (SELECT member_id, api_allow FROM tn_apps WHERE api_key =#{api_key}) B   
 		WHERE 
-			A.ID = B.MEMBER_ID
+			A.id = B.member_id
 	</select>	
 	<select id="selectCallCount" parameterType="String" resultType="int">
 		SELECT 
-			CALL_COUNT 
+			call_count 
 		FROM 
-			TN_API_QUOTA 
+			tn_api_quota 
 		WHERE 
-			API_KEY =#{api_key}
+			api_key =#{api_key}
 	</select>
 	
 	<update id="callCount" parameterType="String">
-		update 
+		UPDATE 
 			tn_api_quota 
-		set 
-			call_count= call_count+1 
-        where 
+		SET 
+			call_count = call_count + 1 
+        WHERE 
         	api_key = #{api_key}
 	</update>
 	

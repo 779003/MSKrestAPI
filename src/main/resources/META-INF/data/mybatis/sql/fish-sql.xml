@@ -4,38 +4,72 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="fish">
 
-	<select id="selectAllFish" parameterType="String" resultType="Fish">
-		SELECT FISH_NAME, FISH_IMGURL, FISH_CONTENT, ORGN_URL FROM TN_FISH 
+	<select id="selectAllFish" resultType="Fish">
+		SELECT 
+			fish_name, 
+			fish_imgurl, 
+			fish_content, 
+			orgn_url 
+		FROM 
+			tn_fish 
 	</select>
 
-	<select id="selectFish" parameterType="Member" resultType="Fish">
-		select id, name, gender, permission_level  
-		from TN_FISH
-		where 1=1
-		<if test="id != null and id != ''">
-		and id = #{id}
-		</if>
+	<select id="selectFish" parameterType="String" resultType="Fish">
+		SELECT 
+			fish_name, 
+			fish_imgurl, 
+			fish_content, 
+			orgn_url 
+		FROM 
+			tn_fish 
+		WHERE
+			fish_name = #{value}
 		
 	</select>
 
-	<insert id="insertMember" parameterType="Member">
-		insert into tn_member(id, name, gender, password)
-		values(#{id}, #{name}, #{gender}, #{password})
+	<insert id="insertFish" parameterType="Fish">
+		INSERT INTO 
+			tn_fish(
+				, FISH_SEQ
+				, FISH_NAME
+				, FISH_IMGURL
+				, FISH_CONTENT
+				, ORGN_URL
+				)
+			VALUES(
+				, api_seq.NEXTVAL
+				, #{fish_name}
+				, #{fish_imgurl}
+				, #{fish_content}
+				, #{orgn_url}
+				)
 	</insert>
 
-	<delete id="deleteMember" parameterType="String">
-		delete from tn_member where id =#{id}
+	<delete id="deleteFish" parameterType="String">
+		DELETE FROM 
+			tn_fish 
+		WHERE 
+			fish_seq = #{value}
 	</delete>
 
-	<update id="updateMember" parameterType="Member">
-		update tn_member set 
-		name = #{name}, 
-		gender = #{gender} 
-		where id = #{id}
+	<update id="updateFish" parameterType="Fish">
+		UPDATE 
+			tn_fish SET 
+			fish_name = #{fish_name}, 
+			fish_imgurl = #{fish_imgurl} 
+			fish_content = #{fish_content} 
+			orgn_url = #{orgn_url} 
+		WHERE 
+			fish_seq = #{value}
 	</update>
 	
-	<select id="countId" parameterType="String" resultType="int">
-		select count(*) from tn_member where id = #{id}
+	<select id="countFish" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			tn_fish 
+		WHERE 
+			fish_seq = #{value}
 	</select>
 	
 </mapper>

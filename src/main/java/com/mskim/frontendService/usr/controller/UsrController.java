@@ -48,7 +48,7 @@ public class UsrController {
 		memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode()));
 		
 		if (loginService.memberLogin(memberVo) > 0) {
-			session.setAttribute("loginSession", memberService.selectMember(memberVo));
+			session.setAttribute("loginSession", memberService.selectMember(memberVo.getId()));
 			currUrl = currUrl.replace(",", "");
 			currUrl = (currUrl == null || currUrl == "") ? "/docs" : currUrl;
 			return "redirect:" + currUrl;

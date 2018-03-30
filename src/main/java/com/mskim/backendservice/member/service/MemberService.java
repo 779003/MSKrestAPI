@@ -62,9 +62,9 @@ public class MemberService implements ApiServiceInterface {
 	 * @param memberVo {@link MemberVo} 멤버 VO
 	 * @return 멤버
 	 */
-	public MemberVo selectMember(MemberVo memberVo) {
+	public MemberVo selectMember(String memberId) {
 		
-		return memberDao.selectMember(memberVo);
+		return memberDao.selectMember(memberId);
 	}
 
 	/**

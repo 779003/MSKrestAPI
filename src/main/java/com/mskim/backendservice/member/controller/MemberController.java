@@ -176,7 +176,7 @@ public class MemberController{
 							logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 							request.setAttribute("logInfo", logInfo);
 							memberService.callCount(apikey);
-							return gson.toJson(memberService.selectMember(requestUrl));					
+							return gson.toJson(memberService.selectMember(requestUrl.getId()));					
 						
 						}else{
 							

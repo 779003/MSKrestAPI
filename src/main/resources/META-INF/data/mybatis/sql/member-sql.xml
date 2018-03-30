@@ -12,14 +12,11 @@
 		</if>
 	</select>
 
-	<select id="selectMember" parameterType="Member" resultType="Member">
+	<select id="selectMember" parameterType="String" resultType="Member">
 		select id, name, gender, permission_level  
-		from tn_member
-		where 1=1
-		<if test="id != null and id != ''">
-		and id = #{id}
-		</if>
-		
+		from tn_member	
+		where 	
+		id = #{value}
 	</select>
 
 	<insert id="insertMember" parameterType="Member">

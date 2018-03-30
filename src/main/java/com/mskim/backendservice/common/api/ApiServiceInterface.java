@@ -36,4 +36,11 @@ public interface ApiServiceInterface {
 	 * @param apiKey api키
 	 */
 	public void callCount(String apiKey);
+	
+	/**
+	 * 멤버 ID 중복체크
+	 * @param memberId {@link String} 멤버 ID
+	 * @return 중복이면 true  
+	 */
+	public boolean alreadyHasValue(String value);
 }

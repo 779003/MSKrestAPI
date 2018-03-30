@@ -27,7 +27,7 @@ import com.mskim.backendservice.member.vo.MemberVo;
  * */
 
 @RestController
-@RequestMapping(value = "/{version}/admin")
+@RequestMapping(value = "/api/{version}/admin")
 public class MemberController{
 
 	static final String API_SEQ ="1";
@@ -37,10 +37,7 @@ public class MemberController{
 	 */
 	@Autowired
 	MemberService memberService;
-	
-	/*@Autowired
-	LogService logService;*/
-		
+			
 	Gson gson = new Gson();
 	
 	/**
@@ -57,10 +54,10 @@ public class MemberController{
 					method = RequestMethod.GET, 
 					produces = "application/json; charset=utf8")
 	public String selectMembers(HttpServletRequest request,
-			HttpServletResponse response, MemberVo requestUrl,
+			HttpServletResponse response, MemberVo parameterVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
         
-		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
 		if(apikey == null){
 			
@@ -72,7 +69,7 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 
 		int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
@@ -100,7 +97,7 @@ public class MemberController{
 					
 				case VERSION_2:
 					
-					if(requestUrl.getGender() == null) {
+					if(parameterVo.getGender() == null) {
 						
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
 						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1004.getCode(), "API_USE");
@@ -112,14 +109,14 @@ public class MemberController{
 						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 						request.setAttribute("logInfo", logInfo);
 						memberService.callCount(apikey);
-						return gson.toJson(memberService.selectMembers(requestUrl.getGender()));	
+						return gson.toJson(memberService.selectMembers(parameterVo.getGender()));	
 					}
 				
 				default:
 					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 					request.setAttribute("logInfo", logInfo);					
 					response.setStatus(HttpStatus.BAD_REQUEST.value());
-					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+					return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			}
 		}			
 	}
@@ -135,10 +132,10 @@ public class MemberController{
 					method = RequestMethod.GET, 
 					produces = "application/json; charset=utf8")
 	public String selectMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVo requestUrl,
+			HttpServletResponse response, MemberVo parameterVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
 		if(apikey == null){
 					
@@ -150,7 +147,7 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}
 
@@ -171,26 +168,26 @@ public class MemberController{
 			LogVo logInfo;
 				switch (requestVersion) {
 					case VERSION_1:						
-						if (memberService.alreadyHasId(requestUrl.getId())) {
+						if (memberService.alreadyHasValue(parameterVo.getId())) {
 							
 							logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 							request.setAttribute("logInfo", logInfo);
 							memberService.callCount(apikey);
-							return gson.toJson(memberService.selectMember(requestUrl.getId()));					
+							return gson.toJson(memberService.selectMember(parameterVo.getId()));					
 						
 						}else{
 							
 							logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_ID.getCode(), "API_USE");
 							request.setAttribute("logInfo", logInfo);
 							response.setStatus(HttpStatus.BAD_REQUEST.value());
-							return memberService.resultWithCode(requestUrl, Code.NO_ID);
+							return memberService.resultWithCode(parameterVo, Code.NO_ID);
 						}
 			
 					default:
 						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.NOT_FOUND.value());
-						return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+						return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 					}
 		}
 	}
@@ -206,11 +203,11 @@ public class MemberController{
 					method = RequestMethod.POST, 
 					produces = "application/json; charset=utf8", consumes = "application/json")
 	public String insertMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVo requestUrl,
+			HttpServletResponse response, MemberVo parameterVo,
 			@RequestBody MemberVo memberVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
 		if(apikey == null){
 			
@@ -222,7 +219,7 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}else{
 			LogVo logInfo;
@@ -230,7 +227,7 @@ public class MemberController{
 			switch (requestVersion) {
 			
 				case VERSION_1:					
-					if (memberService.alreadyHasId(memberVo.getId())) {
+					if (memberService.alreadyHasValue(memberVo.getId())) {
 						
 						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.DUPLICATED_ID.getCode(), "API_USE");
 						request.setAttribute("logInfo", logInfo);
@@ -249,7 +246,7 @@ public class MemberController{
 					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+					return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			}
 		}
 	}
@@ -264,10 +261,10 @@ public class MemberController{
 					method = RequestMethod.DELETE, 
 					produces = "application/json; charset=utf8")
 	public String deleteMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVo requestUrl,
+			HttpServletResponse response, MemberVo parameterVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
 		if(apikey == null){
 			
@@ -279,31 +276,31 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}else{
 			LogVo logInfo;
 			switch (requestVersion) {			
 				case VERSION_1:
-					if (memberService.alreadyHasId(requestUrl.getId())) {
+					if (memberService.alreadyHasValue(parameterVo.getId())) {
 						
 						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 						request.setAttribute("logInfo", logInfo);
-						memberService.deleteMember(requestUrl);
-						return memberService.resultWithCode(requestUrl, Code.DELETE_ID);
+						memberService.deleteMember(parameterVo);
+						return memberService.resultWithCode(parameterVo, Code.DELETE_ID);
 						
 					} else {	
 						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_ID.getCode(), "API_USE");
 						request.setAttribute("logInfo", logInfo);
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						return memberService.resultWithCode(requestUrl, Code.NO_ID);
+						return memberService.resultWithCode(parameterVo, Code.NO_ID);
 					}
 					
 				default:
 					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+					return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			}
 		}
 	}
@@ -320,11 +317,11 @@ public class MemberController{
 					produces = "application/json; charset=utf8", 
 					consumes = "application/json")
 	public String updateMember(HttpServletRequest request,
-			HttpServletResponse response, MemberVo requestUrl,
+			HttpServletResponse response, MemberVo parameterVo,
 			@RequestBody MemberVo memberVo,
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
-		Version requestVersion = Version.getVersionByString(requestUrl.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
 		if(apikey == null){
 			
@@ -336,11 +333,11 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}else{
 
-			if (!requestUrl.getId().equals(memberVo.getId())) {
+			if (!parameterVo.getId().equals(memberVo.getId())) {
 				
 				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1005.getCode(), "API_USE");
 				request.setAttribute("logInfo", logInfo);
@@ -352,7 +349,7 @@ public class MemberController{
 			switch (requestVersion) {
 			
 				case VERSION_1:	
-					if (memberService.alreadyHasId(memberVo.getId())) {
+					if (memberService.alreadyHasValue(memberVo.getId())) {
 						
 						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 						request.setAttribute("logInfo", logInfo);
@@ -372,7 +369,7 @@ public class MemberController{
 					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 					request.setAttribute("logInfo", logInfo);
 					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return memberService.resultWithCode(requestUrl, Code.NO_VERSION);
+					return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 				}
 		}
 	}

@@ -38,84 +38,6 @@ public class MemberService implements ApiServiceInterface {
 	@Autowired
 	AppsDao appsDao;
 	
-	/**
-	 * 여러 멤버 조회 버전1
-	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 멤버 목록
-	 */
-	public List<MemberVo> selectMembers() {
-		
-		return memberDao.selectMembers();
-	}
-	/**
-	 * 여러 멤버 조회 버전2 (성별로 구분)
-	 * @param String gender 성별
-	 * @return 멤버 목록
-	 */
-	public List<MemberVo> selectMembers(String gender) {
-		
-		return memberDao.selectMembers(gender);
-	}
-
-	/**
-	 * 멤버 조회
-	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 멤버
-	 */
-	public MemberVo selectMember(String memberId) {
-		
-		return memberDao.selectMember(memberId);
-	}
-
-	/**
-	 * 멤버 등록
-	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 성공여부 int
-	 */
-	public int insertMember(MemberVo memberVo) {
-		
-		return memberDao.insertMember(memberVo);
-	}
-
-	/**
-	 * 멤버 삭제
-	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 성공여부 int
-	 */
-	public int deleteMember(MemberVo memberVo) {
-		
-		return memberDao.deleteMember(memberVo);
-	}
-
-	/**
-	 * 멤버 수정
-	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 성공여부 int
-	 */
-	public int updateMember(MemberVo memberVo) {
-		
-		return memberDao.updateMember(memberVo);
-	}
-
-	/**
-	 * 멤버 ID 중복체크
-	 * @param memberId {@link String} 멤버 ID
-	 * @return 중복이면 true  
-	 */
-	public boolean alreadyHasId(String memberId) {
-		
-		if(memberDao.countId(memberId) > 0){
-			return true;
-		}else{
-			return false;
-		}	
-	}
-	
-	@Override
-	public void callCount(String apiKey){
-		appsDao.callCount(apiKey);
-	}
-	
 	@Override
 	public String resultWithCode(Object apiVo, Code code) {
 		
@@ -169,8 +91,6 @@ public class MemberService implements ApiServiceInterface {
 				referer = referer.replace("https://", "");
 				
 				if(!referer.equals(usrApiAllow)){
-					System.out.println(referer + "--referer");
-					System.out.println(usrApiAllow + "--usrApiAllow");
 						return -8003;				
 					}
 			}else{
@@ -182,55 +102,82 @@ public class MemberService implements ApiServiceInterface {
 		int remainingViews = usrPermissionLevel.equals(ADMIN) ?  MAX_QUOTA_ADMIN - usrCallCount : MAX_QUOTA_USER - usrCallCount;
 		remainingViews = remainingViews < 0 ? 0 : remainingViews;
 		
-		return remainingViews;
-		
-		
-		
-		/*
-		if (appsDao.thisKeyCorrect(requestInfo) > 0) {
-			
-			HashMap<String, String> allowInfo = appsDao.selectAllowInfo(apiKey);
-			String usrApiAllow = allowInfo.get("API_ALLOW");
-			String usrPermissionLevel = allowInfo.get("PERMISSION_LEVEL");
-			int usrCallCount = appsDao.selectCallCount(apiKey);
-			
-			if (usrApiAllow == null) {
-				if (ADMIN.equals(usrPermissionLevel)) {
-					return MAX_QUOTA_ADMIN - usrCallCount;
-				} else {
-					return MAX_QUOTA_USER - usrCallCount;
-				}
-			}else{
-				
-				if(referer != null){
-					
-					usrApiAllow = referer.replace("http://", "");   
-					usrApiAllow = referer.replace("https://", ""); 
-					referer = referer.replace("http://", "");
-					referer = referer.replace("https://", "");
-					
-					if(referer.equals(usrApiAllow)){
-						if (ADMIN.equals(usrPermissionLevel)) {
-							return MAX_QUOTA_ADMIN - usrCallCount;
-						} else {
-							return MAX_QUOTA_USER - usrCallCount;
-						}
-					} else{
-						return -8003;
-					}
-					
-				}else{
-					return -8002; 
-				}
-				
-			}
-			
-		} else {
-			return -8001;
-		}
-		*/
+		return remainingViews;		
 	}
 	
+	@Override
+	public void callCount(String apiKey){
+		appsDao.callCount(apiKey);
+	}
 	
+	@Override
+	public boolean alreadyHasValue(String value) {
+		
+		if(memberDao.countId(value) > 0){
+			return true;
+		}else{
+			return false;
+		}	
+	}
 	
+	/**
+	 * 여러 멤버 조회 버전1
+	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * @return 멤버 목록
+	 */
+	public List<MemberVo> selectMembers() {
+		
+		return memberDao.selectMembers();
+	}
+	
+	/**
+	 * 여러 멤버 조회 버전2 (성별로 구분)
+	 * @param String gender 성별
+	 * @return 멤버 목록
+	 */
+	public List<MemberVo> selectMembers(String gender) {
+		
+		return memberDao.selectMembers(gender);
+	}
+
+	/**
+	 * 멤버 조회
+	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * @return 멤버
+	 */
+	public MemberVo selectMember(String memberId) {
+		
+		return memberDao.selectMember(memberId);
+	}
+
+	/**
+	 * 멤버 등록
+	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * @return 성공여부 int
+	 */
+	public int insertMember(MemberVo memberVo) {
+		
+		return memberDao.insertMember(memberVo);
+	}
+
+	/**
+	 * 멤버 삭제
+	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * @return 성공여부 int
+	 */
+	public int deleteMember(MemberVo memberVo) {
+		
+		return memberDao.deleteMember(memberVo);
+	}
+
+	/**
+	 * 멤버 수정
+	 * @param memberVo {@link MemberVo} 멤버 VO
+	 * @return 성공여부 int
+	 */
+	public int updateMember(MemberVo memberVo) {
+		
+		return memberDao.updateMember(memberVo);
+	}
+
 }

@@ -53,11 +53,8 @@ public class AppsController {
 		List<AppsVo> myApps = appsService.selectAllApps(loginService.getLoginMember(session).getId());
 		model.addAttribute("myApps", myApps);
 		
-		
-		
 		return "document/common/container";
 	}
-	
 		
 	@RequestMapping(value="/register", method = RequestMethod.GET)
 	public String appRegisterPage(Model model, HttpSession session){
@@ -68,8 +65,6 @@ public class AppsController {
 		model.addAttribute("category2", "오픈 API 신청");
 		model.addAttribute("categoryLink", "/apps");
 		model.addAttribute("content", "../myPage/registerApp.jsp");
-		
-		
 		
 		return "document/common/container";
 	}
@@ -96,9 +91,8 @@ public class AppsController {
 		usrInfo.put("api_key", apiKey);
 		usrInfo.put("member_id", memberId);
 		
-		//TODO 잘못된사용자임을 안내하는 에러페이지로 리다이렉트 처리 (다른유저 수정페이지로 접근 방지)
 		if(appsService.appUsrCheck(usrInfo) == 0){
-			return "redirect:/apps";
+			return "redirect:/error/400";
 		}
 		
 			model.addAttribute("ssMemberId", memberId);
@@ -111,8 +105,8 @@ public class AppsController {
 			model.addAttribute("targetApp", targetApp);
 			
 			return "document/common/container";
-				
 	}
+	
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
 	public String modifyApp(HttpSession session, AppsVo appsVo){
 		

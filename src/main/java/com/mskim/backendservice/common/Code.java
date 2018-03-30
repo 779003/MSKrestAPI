@@ -12,8 +12,8 @@ public enum Code {
 	NO_VERSION("1001", "유효하지 않은 버전입니다. 버전을 확인해주세요."), 
 	NO_SERVICE_VERSION("1002", "준비 중인 버전입니다."), 
 	NO_ID("1003", "없는 ID입니다."),
-	BAD_REQUEST("1004", "요청정보가 잘못되었습니다."),
-	BAD_REQUEST2("1005", "요청정보가 잘못되었습니다. URL정보와 body정보가 일치하지않습니다."),
+	BAD_REQUEST_1004("1004", "요청정보가 잘못되었습니다."),
+	BAD_REQUEST_1005("1005", "요청정보가 잘못되었습니다. URL정보와 body정보가 일치하지않습니다."),
 	
 		/*처리 메시지*/
 	/*Member*/
@@ -24,7 +24,7 @@ public enum Code {
 	EXCEEDED_CALL("2005", "일일 허용량을 초과하였습니다."),
 	
 		/*장애*/
-	BAD_REQUEST_400("400", "잘못된 요청입니다."),
+	BAD_REQUEST("400", "잘못된 요청입니다."),
 	NOT_FOUND("404", "요청하신 페이지를 찾을 수 없습니다."),
 	METHOD_NOT_ALLOWED("405", "요청하신 URL에서 지원하지 않는 HTTP 메소드입니다."),
 	UNSUPPORTED_MEDIA_TYPE("415", "요청과 응답은 JSON형식만 지원합니다."),

@@ -5,18 +5,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.mskim.backendservice.common.Code;
 import com.mskim.backendservice.common.Version;
-import com.mskim.backendservice.common.log.service.LogService;
 import com.mskim.backendservice.common.log.vo.LogVo;
 import com.mskim.backendservice.member.service.MemberService;
 import com.mskim.backendservice.member.vo.MemberVo;
@@ -67,7 +64,7 @@ public class MemberController{
 
 		if(apikey == null){
 			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return memberService.resultWithCode(Code.NO_APIKEY);
 
 		}else if (requestVersion == null) {
@@ -80,14 +77,15 @@ public class MemberController{
 
 		int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
 		if(viewsCount < 0){ //결과가 음수일 경우 코드값
-			//TODO 배드 리퀘스트가 아닌듯
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			
+			response.setStatus(HttpStatus.FORBIDDEN.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
 			
 		}else if(viewsCount == 0){
 			
+			response.setStatus(HttpStatus.FORBIDDEN.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(Code.EXCEEDED_CALL);
@@ -105,9 +103,9 @@ public class MemberController{
 					if(requestUrl.getGender() == null) {
 						
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST.getCode(), "API_USE");
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1004.getCode(), "API_USE");
 						request.setAttribute("logInfo", logInfo);
-						return memberService.resultWithCode(Code.BAD_REQUEST);
+						return memberService.resultWithCode(Code.BAD_REQUEST_1004);
 						
 					}else {
 						
@@ -144,7 +142,7 @@ public class MemberController{
 		
 		if(apikey == null){
 					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return memberService.resultWithCode(Code.NO_APIKEY);
 		
 		}else if (requestVersion == null) {
@@ -216,7 +214,7 @@ public class MemberController{
 
 		if(apikey == null){
 			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return memberService.resultWithCode(Code.NO_APIKEY);
 		
 		}else if (requestVersion == null) {
@@ -273,7 +271,7 @@ public class MemberController{
 
 		if(apikey == null){
 			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return memberService.resultWithCode(Code.NO_APIKEY);
 		
 		}else if (requestVersion == null) {
@@ -330,7 +328,7 @@ public class MemberController{
 		
 		if(apikey == null){
 			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return memberService.resultWithCode(Code.NO_APIKEY);
 		
 		}else if (requestVersion == null) {
@@ -344,10 +342,10 @@ public class MemberController{
 
 			if (!requestUrl.getId().equals(memberVo.getId())) {
 				
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST2.getCode(), "API_USE");
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1005.getCode(), "API_USE");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
-				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST2);
+				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST_1005);
 			}
 			
 			LogVo logInfo;

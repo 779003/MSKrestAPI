@@ -38,12 +38,12 @@ public class LogInterceptor  extends HandlerInterceptorAdapter  {
 		long endTime = System.currentTimeMillis();
 		long takeTime = endTime - startTime;
 		
-		logger.info("[API CALLED] ==============================================");
+		logger.info("[API CALLED] ===================================================");
 		
 		String logMessage = "";
 		
 		if(request.getRequestURI() != null) {
-			logMessage += " RequestURI : " + request.getRequestURI();
+			logMessage += "| RequestURI : " + request.getRequestURI() +"(" + request.getMethod() + ")";
 			
 			if(request.getQueryString() != null) {
 				logMessage += "?" + request.getQueryString();
@@ -67,7 +67,7 @@ public class LogInterceptor  extends HandlerInterceptorAdapter  {
 		}else {
 			LogVo logInfo = (LogVo) request.getAttribute("logInfo");
 			
-			String useInfo = "USER : " + logInfo.getApi_key();
+			String useInfo = "| USER : " + logInfo.getApi_key();
 			useInfo += ", Success? : " + logInfo.getSuccess();
 			
 			if( "FAILURE".equals(logInfo.getSuccess())) {
@@ -83,7 +83,7 @@ public class LogInterceptor  extends HandlerInterceptorAdapter  {
 			}
 		}
 		
-		logger.info("take Time : " + takeTime + " ms ==============================================");
+		logger.info("L take Time : " + takeTime + " ms ==============================================");
 		
 	}
 

@@ -111,6 +111,7 @@ public class FishService implements ApiServiceInterface{
 	
 	@Override
 	public boolean alreadyHasValue(String fishName) {
+		
 		 String fishSeq = getFishSeq(fishName);
 		 if(fishSeq == null || fishDao.countFish(fishSeq) == 0) {
 			 return false;

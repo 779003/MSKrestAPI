@@ -8,25 +8,23 @@ import lombok.Getter;
 @Getter
 public enum Code {
 	
-	
+//TODO 코드번호 재정리 필요
+		/*메시지*/
+	/**
+	 * {@code 200 OK}.
+	 */
 	OK("200", "작업을 성공하였습니다."),
+	/**
+	 * {@code 200 NO_RESULT}.
+	 */
+	NO_RESULT("2001", "조회 결과가 없습니다."),
+	NO_RESULT_WITH_VALUE("2002", " [%s]로 조회한 결과가 없습니다."),
+	EXCEEDED_CALL("2003", "일일 허용량을 초과하였습니다."),
+	NO_VALUE("2222", "해당 정보가 없습니다."),
+	NO_VALUE_UPDATE("2312", "수정하려는 정보가 없습니다."),
+	NO_VALUE_DELETE("231222", "삭제하려는 정보가 없습니다."),
 	
-		/*파라미터 문제*/
-	NO_VERSION("1001", "유효하지 않은 버전입니다. 버전을 확인해주세요."), 
-	NO_SERVICE_VERSION("1002", "준비 중인 버전입니다."), 
-	NO_ID("1003", "없는 ID입니다."),
-	BAD_REQUEST_1004("1004", "요청정보가 잘못되었습니다."),
-	BAD_REQUEST_1005("1005", "요청정보가 잘못되었습니다. URL정보와 body정보가 일치하지않습니다."),
-	
-		/*처리 메시지*/
-	/*Member*/
-	DELETE_ID("2001", "아이디 %s를 삭제 했습니다."),
-	UPDATE_ID("2002", "아이디 %s를 수정 했습니다."),
-	INSERT_ID("2003", "아이디 %s를 생성 했습니다."),
-	DUPLICATED_ID("2004", "아이디가 중복됩니다."),
-	EXCEEDED_CALL("2005", "일일 허용량을 초과하였습니다."),
-	
-		/*장애*/
+	/*장애*/
 	BAD_REQUEST("400", "잘못된 요청입니다."),
 	NOT_FOUND("404", "요청하신 페이지를 찾을 수 없습니다."),
 	METHOD_NOT_ALLOWED("405", "요청하신 URL에서 지원하지 않는 HTTP 메소드입니다."),
@@ -36,8 +34,32 @@ public enum Code {
 	NO_REFERER("8002", "본 API를 호출하는 서비스에서 정보가 없습니다. 본 서비스에서 API호출을 사용하기 원하면 APP의 접근설정을 모두 허용 해야합니다."),
 	NOT_ALLOWED("8003", "접근 설정한 URL과 호출하는 서비스 URL이 일치하지 않습니다."),
 	BAD_DATA("9001", "입력 데이터가 잘못되었습니다."),
-	NO_APIKEY("9002", "API KEY가 누락되었습니다. 해더에 API KEY정보 포함되어야합니다."),
-	UNKNOWN_ERROR("9999", "알 수 없는 오류입니다.")
+	NO_APIKEY("9002", "API KEY가 누락되었습니다. 해더에 API KEY정보가 포함되어야합니다."),
+	UNKNOWN_ERROR("9999", "알 수 없는 오류입니다."),
+	
+		/*파라미터 문제*/
+	NO_VERSION("1001", "유효하지 않은 버전입니다. 버전을 확인해주세요."), 
+	NO_SERVICE_VERSION("1002", "준비 중인 버전입니다."), 
+	BAD_REQUEST_1004("1004", "요청정보가 잘못되었습니다."),
+	BAD_REQUEST_1005("1005", "요청정보가 잘못되었습니다. URL정보와 body정보가 일치하지않습니다."),
+	
+		/*처리 메시지*/
+	/*공통*/
+	DELETE("2001", "삭제가 완료되었습니다."),
+	UPDATE("2002", "수정이 완료되었습니다."),
+	INSERT("2003", "생성이 완료되었습니다."),
+	
+	/*Member*/
+	DELETE_ID("3001", "아이디 %s를 삭제 했습니다."),
+	UPDATE_ID("3002", "아이디 %s를 수정 했습니다."),
+	INSERT_ID("3003", "아이디 %s를 생성 했습니다."),
+	DUPLICATED_ID("3004", "아이디가 중복됩니다."),
+	NO_ID("3006", "해당 ID가 없습니다."),
+	
+	/*열대어정보*/
+	DUPLICATED_FISH("3004", "물고기 명이 중복됩니다.")
+	
+	
 	;
 	
 	private final String code;
@@ -62,7 +84,6 @@ public enum Code {
 	 * 코드번호를 받아 {@link Code} 리턴
 	 */
 	public static Code getCodeByCodeNumber(int codeNumber){
-		System.out.println("codeNumber : " +codeNumber );
 		
 		for(Code getCode : values()){
 			if(getCode.code.equals(String.valueOf(codeNumber))){

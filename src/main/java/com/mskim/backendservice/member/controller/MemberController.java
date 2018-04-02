@@ -222,6 +222,17 @@ public class MemberController{
 			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}else{
+			
+			int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+			if(viewsCount < 0){ //결과가 음수일 경우 코드값
+				
+				response.setStatus(HttpStatus.FORBIDDEN.value());
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
+				
+			}
+			
 			LogVo logInfo;
 			memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode())); 
 			switch (requestVersion) {
@@ -279,6 +290,17 @@ public class MemberController{
 			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
 		}else{
+			
+			int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+			if(viewsCount < 0){ //결과가 음수일 경우 코드값
+				
+				response.setStatus(HttpStatus.FORBIDDEN.value());
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
+				
+			}
+			
 			LogVo logInfo;
 			switch (requestVersion) {			
 				case VERSION_1:
@@ -343,6 +365,16 @@ public class MemberController{
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST_1005);
+			}
+			
+			int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+			if(viewsCount < 0){ //결과가 음수일 경우 코드값
+				
+				response.setStatus(HttpStatus.FORBIDDEN.value());
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				return memberService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
+				
 			}
 			
 			LogVo logInfo;

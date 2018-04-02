@@ -6,6 +6,7 @@
 
 	<select id="selectAllFish" resultType="Fish">
 		SELECT 
+			fish_seq,
 			fish_name, 
 			fish_imgurl, 
 			fish_content, 
@@ -16,6 +17,7 @@
 
 	<select id="selectFish" parameterType="String" resultType="Fish">
 		SELECT 
+		 	fish_seq,
 			fish_name, 
 			fish_imgurl, 
 			fish_content, 
@@ -23,21 +25,21 @@
 		FROM 
 			tn_fish 
 		WHERE
-			fish_name = #{value}
+			fish_seq = #{value}
 		
 	</select>
 
 	<insert id="insertFish" parameterType="Fish">
 		INSERT INTO 
 			tn_fish(
-				, FISH_SEQ
+				 FISH_SEQ
 				, FISH_NAME
 				, FISH_IMGURL
 				, FISH_CONTENT
 				, ORGN_URL
 				)
 			VALUES(
-				, api_seq.NEXTVAL
+				 api_seq.NEXTVAL
 				, #{fish_name}
 				, #{fish_imgurl}
 				, #{fish_content}
@@ -54,13 +56,14 @@
 
 	<update id="updateFish" parameterType="Fish">
 		UPDATE 
-			tn_fish SET 
+			tn_fish 
+		SET 
 			fish_name = #{fish_name}, 
-			fish_imgurl = #{fish_imgurl} 
-			fish_content = #{fish_content} 
+			fish_imgurl = #{fish_imgurl}, 
+			fish_content = #{fish_content}, 
 			orgn_url = #{orgn_url} 
 		WHERE 
-			fish_seq = #{value}
+			fish_seq = #{fish_seq}
 	</update>
 	
 	<select id="countFish" parameterType="String" resultType="int">
@@ -70,6 +73,15 @@
 			tn_fish 
 		WHERE 
 			fish_seq = #{value}
+	</select>
+	
+	<select id="getFishSeq" parameterType="String" resultType="String">
+		SELECT
+			fish_seq
+		FROM
+			tn_fish
+		WHERE
+			fish_name = #{value}		
 	</select>
 	
 </mapper>

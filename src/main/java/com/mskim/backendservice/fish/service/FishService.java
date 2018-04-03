@@ -71,7 +71,7 @@ public class FishService implements ApiServiceInterface{
 		boolean notValidKey = appsDao.thisKeyCorrect(requestInfo) <= 0 ? true : false;		
 		
 		if (notValidKey) {
-			return -8001;
+			return -2001;
 		}
 		
 		HashMap<String, String> allowInfo = appsDao.selectAllowInfo(apiKey);
@@ -88,11 +88,11 @@ public class FishService implements ApiServiceInterface{
 				referer = referer.replace("https://", "");
 				
 				if(!referer.equals(usrApiAllow)){
-						return -8003;				
+						return -2003;				
 					}
 				
 			}else{
-				return -8002; 
+				return -2002; 
 			}
 			
 		}

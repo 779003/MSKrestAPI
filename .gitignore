@@ -1,6 +1,7 @@
 .metadata
 bin/
 tmp/
+target/
 *.tmp
 *.bak
 *.swp
@@ -19,3 +20,4 @@ local.properties
 .tern-project
 .springBeans
 .recommenders/
+*.class

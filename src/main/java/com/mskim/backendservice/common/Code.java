@@ -7,8 +7,8 @@ import lombok.Getter;
  */
 @Getter
 public enum Code {
-
-	OK("200", "작업을 성공하였습니다."),	
+ 
+	OK("200", "작업을 성공하였습니다."),
 	NO_RESULT("1001", "조회 결과가 없습니다."),
 	NO_RESULT_WITH_VALUE("1002", " [%s]로 조회한 결과가 없습니다."),
 	EXCEEDED_CALL("1003", "일일 허용량을 초과하였습니다."),

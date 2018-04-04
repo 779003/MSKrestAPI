@@ -33,7 +33,7 @@
 
 	<interceptors>
 		<interceptor>
-			<mapping path="/*/admin/members/**"/>
+			<mapping path="/api/**"/>
 			<beans:bean id="LogInterceptor" class="com.mskim.backendservice.common.log.interceptor.LogInterceptor"/>
 		</interceptor>
 	</interceptors>

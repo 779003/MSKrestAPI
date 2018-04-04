@@ -9,6 +9,7 @@
 		<typeAlias alias="Apps" type="com.mskim.frontendService.apps.vo.AppsVo" /> 
 		<typeAlias alias="ApiList" type="com.mskim.frontendService.apps.vo.ApiListVo" /> 
 		<typeAlias alias="Log" type="com.mskim.backendservice.common.log.vo.LogVo" /> 
+		<typeAlias alias="Aquarium" type="com.mskim.backendservice.aquarium.vo.AquariumVo" /> 
 	</typeAliases>
 	<mappers>
 	 	<mapper resource="META-INF/data/mybatis/sql/member-sql.xml" /> 
@@ -16,5 +17,6 @@
 	 	<mapper resource="META-INF/data/mybatis/sql/login-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/apps-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/log-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/aquarium-sql.xml" /> 
 	</mappers>
 </configuration>

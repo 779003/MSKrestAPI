@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="aquarium">
+
+	<select id="selectAquariums" resultType="Aquarium">
+		SELECT 
+			aquarium_seq,
+			aquarium_name,
+			aquarium_address,
+			aquarium_time,
+			aquarium_tel
+		FROM 
+			tn_aquarium 
+	</select>
+
+	<select id="selectAquarium" parameterType="String" resultType="Aquarium">
+		SELECT 
+		 	aquarium_seq,
+			aquarium_name,
+			aquarium_address,
+			aquarium_time,
+			aquarium_tel
+		FROM 
+			tn_aquarium 
+		WHERE
+			aquarium_seq = #{value}
+		
+	</select>
+
+	<insert id="insertAquarium" parameterType="Aquarium">
+		INSERT INTO 
+			tn_aquarium(
+				aquarium_seq,
+				aquarium_name,
+				aquarium_address,
+				aquarium_time,
+				aquarium_tel
+				)
+			VALUES(
+				 api_seq.NEXTVAL
+				, #{aquarium_name}
+				, #{aquarium_address}
+				, #{aquarium_time}
+				, #{aquarium_tel}
+				)
+	</insert>
+
+	<delete id="deleteAquarium" parameterType="String">
+		DELETE FROM 
+			tn_aquarium 
+		WHERE 
+			aquarium_seq = #{value}
+	</delete>
+
+	<update id="updateAquarium" parameterType="Aquarium">
+		UPDATE 
+			tn_aquarium 
+		SET 
+			aquarium_name = #{aquarium_name}, 
+			aquarium_address = #{aquarium_address}, 
+			aquarium_time = #{aquarium_time}, 
+			aquarium_tel = #{aquarium_tel} 
+		WHERE 
+			aquarium_seq = #{aquarium_seq}
+	</update>
+	
+	<select id="countAquarium" parameterType="String" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			tn_aquarium 
+		WHERE 
+			aquarium_seq = #{value}
+	</select>
+	
+	<select id="getAquariumSeq" parameterType="String" resultType="String">
+		SELECT
+			aquarium_seq
+		FROM
+			tn_aquarium
+		WHERE
+			aquarium_name = #{value}		
+	</select>
+	
+</mapper>

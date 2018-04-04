@@ -22,8 +22,8 @@ public class FishDao {
 		return sqlsession.selectList("fish.selectAllFish");
 	}
 	
-	public FishVo selectFish(String fishName) {
-		return sqlsession.selectOne("fish.selectFish", fishName);
+	public FishVo selectFish(String fishSeq) {
+		return sqlsession.selectOne("fish.selectFish", fishSeq);
 	}
 	
 	public void insertFish(FishVo fishVo) {
@@ -40,9 +40,5 @@ public class FishDao {
 	
 	public int countFish(String fishSeq) {
 		return sqlsession.selectOne("fish.countFish", fishSeq);
-	}
-	
-	public String getFishSeq(String fishName) {
-		return sqlsession.selectOne("fish.getFishSeq", fishName);
 	}
 }

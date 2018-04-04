@@ -11,6 +11,7 @@ import com.google.gson.Gson;
 import com.mskim.backendservice.common.ApiInfoVo;
 import com.mskim.backendservice.common.Code;
 import com.mskim.backendservice.common.api.ApiServiceInterface;
+import com.mskim.backendservice.fish.vo.FishVo;
 import com.mskim.backendservice.member.dao.MemberDao;
 import com.mskim.backendservice.member.vo.MemberVo;
 import com.mskim.frontendService.apps.dao.AppsDao;
@@ -52,6 +53,17 @@ public class MemberService implements ApiServiceInterface {
 		}
 		
 		info.setInfomation(guideCode);
+		String resultJsonToString = gson.toJson(info);
+		return resultJsonToString;
+	}
+	
+	@Override
+	public String resultWithCode(String message, Code code) {
+		
+		String reMessage = String.format(code.getMessage(), message);
+		ApiInfoVo info = new ApiInfoVo(code);		
+		info.setInfomation(guideCode);
+		info.setMessage(reMessage);
 		String resultJsonToString = gson.toJson(info);
 		return resultJsonToString;
 	}
@@ -120,6 +132,31 @@ public class MemberService implements ApiServiceInterface {
 		}	
 	}
 	
+	@Override
+	public String dataMissingCheck(Object apiVo) {
+
+		MemberVo memberVo = new MemberVo();
+		memberVo = (MemberVo) apiVo;
+		
+		String missingField = "";
+		
+		if(memberVo.getId() == null) {
+			missingField = missingField.equals("") ? "id" : ", id";
+		}
+		if(memberVo.getName() == null) {
+			missingField += missingField.equals("") ? "name" : ", name";
+		}
+		if(memberVo.getGender() == null) {
+			missingField += missingField.equals("") ? "gender" : ", gender";
+		}
+		if(memberVo.getPassword() == null) {
+			missingField += missingField.equals("") ? "password" : ", password";
+		}
+		
+		return missingField;
+	}
+	
+	
 	/**
 	 * 여러 멤버 조회 버전1
 	 * @param memberVo {@link MemberVo} 멤버 VO
@@ -179,5 +216,4 @@ public class MemberService implements ApiServiceInterface {
 		
 		return memberDao.updateMember(memberVo);
 	}
-
 }

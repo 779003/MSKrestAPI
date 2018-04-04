@@ -75,13 +75,4 @@
 			fish_seq = #{value}
 	</select>
 	
-	<select id="getFishSeq" parameterType="String" resultType="String">
-		SELECT
-			fish_seq
-		FROM
-			tn_fish
-		WHERE
-			fish_name = #{value}		
-	</select>
-	
 </mapper>

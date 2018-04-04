@@ -22,6 +22,15 @@ public interface ApiServiceInterface {
 	public String resultWithCode(Code code);
 	
 	/**
+	 * 메시지와 코드를 받아 요청에 대한 결과 내용을 코드포함한 JSON 문자열로 출력
+	 * 
+	 * @param code 요청에 해당하는 코드
+	 * @param message 코드메시지에 추가하려는 메시지
+	 * @return 요청에 대한 결과 내용 JSON 문자열
+	 */
+	public String resultWithCode(String message ,Code code);
+	
+	/**
 	 * API Key 검사,
 	 * 일일 API 호출 한도량 검사
 	 * 
@@ -38,9 +47,16 @@ public interface ApiServiceInterface {
 	public void callCount(String apiKey);
 	
 	/**
-	 * 멤버 ID 중복체크
-	 * @param memberId {@link String} 멤버 ID
+	 * 중복체크
+	 * @param value  {@link String} 중복확인할 내용
 	 * @return 중복이면 true  
 	 */
 	public boolean alreadyHasValue(String value);
+	
+	/**
+	 * 입력, 수정 시 데이터가 다 들어왔는지  체크
+	 * 
+	 * @return 누락된 항목 목록
+	 */
+	public String dataMissingCheck(Object apiVo);
 }

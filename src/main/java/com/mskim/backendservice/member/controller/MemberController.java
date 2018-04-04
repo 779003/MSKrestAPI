@@ -100,9 +100,9 @@ public class MemberController{
 					if(parameterVo.getGender() == null) {
 						
 						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1004.getCode(), "API_USE");
+						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3003.getCode(), "API_USE");
 						request.setAttribute("logInfo", logInfo);
-						return memberService.resultWithCode(Code.BAD_REQUEST_1004);
+						return memberService.resultWithCode(Code.BAD_REQUEST_3003);
 						
 					}else {
 						
@@ -220,6 +220,15 @@ public class MemberController{
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
 			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
+			
+		}else if(! memberService.dataMissingCheck(memberVo).equals("")) {
+			
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			
+			String missingField = memberService.dataMissingCheck(memberVo);
+			return memberService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 			
 		}else{
 			
@@ -361,10 +370,19 @@ public class MemberController{
 
 			if (!parameterVo.getId().equals(memberVo.getId())) {
 				
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1005.getCode(), "API_USE");
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
-				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST_1005);
+				return memberService.resultWithCode(memberVo, Code.BAD_REQUEST_3004);
+				
+			}else if(!memberService.dataMissingCheck(memberVo).equals("")|| memberService.dataMissingCheck(memberVo).equals("member_id")) { //수정시 id는 입력받지 않기 때문
+				
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				
+				String missingField = memberService.dataMissingCheck(memberVo);
+				return memberService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 			}
 			
 			int viewsCount = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));

@@ -43,7 +43,7 @@ public class FishService implements ApiServiceInterface{
 		ApiInfoVo info = new ApiInfoVo(fishVo.getVersion(), code);
 		
 		if(code.equals(Code.NO_RESULT_WITH_VALUE)){
-			String reMessage = String.format(code.getMessage(), fishVo.getFish_name());
+			String reMessage = String.format(code.getMessage(), fishVo.getFish_seq());
 			info.setMessage(reMessage);
 		}
 		
@@ -52,6 +52,17 @@ public class FishService implements ApiServiceInterface{
 		return resultJsonToString;
 	}
 
+	@Override
+	public String resultWithCode(String message, Code code) {
+		
+		String reMessage = String.format(code.getMessage(), message);
+		ApiInfoVo info = new ApiInfoVo(code);		
+		info.setInfomation(guideCode);
+		info.setMessage(reMessage);
+		String resultJsonToString = gson.toJson(info);
+		return resultJsonToString;
+	}
+	
 	@Override
 	public String resultWithCode(Code code) {
 		
@@ -110,22 +121,45 @@ public class FishService implements ApiServiceInterface{
 	}
 	
 	@Override
-	public boolean alreadyHasValue(String fishName) {
+	public boolean alreadyHasValue(String fishSeq) {
 		
-		 String fishSeq = getFishSeq(fishName);
-		 if(fishSeq == null || fishDao.countFish(fishSeq) == 0) {
+		 if(fishDao.countFish(fishSeq) == 0) {
 			 return false;
 		 }else{
 			return true;
 		}	
 	}
 	
+	@Override
+	public String dataMissingCheck(Object apiVo) {
+
+		FishVo fishVo = new FishVo();
+		fishVo = (FishVo) apiVo;
+		
+		String missingField = "";
+		
+		if(fishVo.getFish_name() == null) {
+			missingField = missingField.equals("") ? "fish_name" : ", fish_name";
+		}
+		if(fishVo.getFish_imgurl() == null) {
+			missingField += missingField.equals("") ? "fish_imgurl" : ", fish_imgurl";
+		}
+		if(fishVo.getFish_content() == null) {
+			missingField += missingField.equals("") ? "fish_content" : ", fish_content";
+		}
+		if(fishVo.getOrgn_url() == null) {
+			missingField += missingField.equals("") ? "orgn_url" : ", orgn_url";
+		}
+		
+		return missingField;
+	}
+	
 	public List<FishVo> selectAllFish(){
 		return fishDao.selectAllFish();
 	}
 	
-	public FishVo selectFish(String fishName) {
-		return fishDao.selectFish(fishName);
+	public FishVo selectFish(String fishSeq) {
+		return fishDao.selectFish(fishSeq);
 	}
 	
 	public void insertFish(FishVo fishVo) {
@@ -143,9 +177,4 @@ public class FishService implements ApiServiceInterface{
 	public int countFish(String fishSeq) {
 		return fishDao.countFish(fishSeq);
 	}
-
-	public String getFishSeq(String fishNmae) {
-		return fishDao.getFishSeq(fishNmae);
-	}
-	
 }

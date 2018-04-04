@@ -82,7 +82,7 @@ public class FishController {
 		}	
 	}
 	
-	@RequestMapping(value ="/fish/{fish_name}", 
+	@RequestMapping(value ="/fish/{fish_seq}", 
 			method = RequestMethod.GET, 
 			produces = "application/json; charset=utf8" )
 	public String selectFish(@RequestHeader(value = "Apikey", required = false) String apikey, FishVo parameterVo,
@@ -122,12 +122,12 @@ public class FishController {
 			
 			switch (requestVersion) {
 				case VERSION_1:						
-					if (fishService.alreadyHasValue(parameterVo.getFish_name())) {
+					if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
 						
 						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 						request.setAttribute("logInfo", logInfo);
 						fishService.callCount(apikey);
-						return gson.toJson(fishService.selectFish(parameterVo.getFish_name()));					
+						return gson.toJson(fishService.selectFish(parameterVo.getFish_seq()));					
 						
 					}else{
 							
@@ -167,6 +167,15 @@ public class FishController {
 			request.setAttribute("logInfo", logInfo);
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
+		}else if(! fishService.dataMissingCheck(fishVo).equals("")) {
+			
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			
+			String missingField = fishService.dataMissingCheck(fishVo);
+			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+			
 		}else{
 			
 			int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
@@ -177,8 +186,9 @@ public class FishController {
 				return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
 			}
 			
-			LogVo logInfo;
 			
+			
+			LogVo logInfo;			
 			switch (requestVersion) {
 			
 				case VERSION_1:					
@@ -260,7 +270,7 @@ public class FishController {
 			FishVo parameterVo, @RequestBody FishVo fishVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 
-Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
 		if(apikey == null){
 			
@@ -274,6 +284,15 @@ Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 			request.setAttribute("logInfo", logInfo);
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
+		}else if(! fishService.dataMissingCheck(fishVo).equals("")) {
+			
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			
+			String missingField = fishService.dataMissingCheck(fishVo);
+			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+			
 		}else{
 
 			int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
@@ -286,10 +305,10 @@ Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 			
 			if (!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
 				
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_1005.getCode(), "API_USE");
+				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
-				return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_1005);
+				return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_3004);
 			}
 			
 			LogVo logInfo;

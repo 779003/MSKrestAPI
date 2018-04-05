@@ -115,18 +115,12 @@ public class AquariumService implements ApiServiceInterface {
 
 	@Override
 	public void callCount(String apiKey) {
-		
 		appsDao.callCount(apiKey);
 	}
 
 	@Override
 	public boolean alreadyHasValue(String aquariumSeq) {
-		
-		if(aquariumDao.countAquarium(aquariumSeq) == 0) {
-			 return false;
-		 }else{
-			return true;
-		}
+		return aquariumDao.countAquarium(aquariumSeq) == 0 ? false : true;
 	}
 	
 	@Override
@@ -152,7 +146,6 @@ public class AquariumService implements ApiServiceInterface {
 		
 		return missingField;
 	}
-	
 	
 	public List<AquariumVo> selectAquariums(){
 		return aquariumDao.selectAquariums();

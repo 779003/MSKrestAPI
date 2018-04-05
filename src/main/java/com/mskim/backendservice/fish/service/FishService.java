@@ -122,12 +122,7 @@ public class FishService implements ApiServiceInterface{
 	
 	@Override
 	public boolean alreadyHasValue(String fishSeq) {
-		
-		 if(fishDao.countFish(fishSeq) == 0) {
-			 return false;
-		 }else{
-			return true;
-		}	
+		return fishDao.countFish(fishSeq) == 0 ? false : true;
 	}
 	
 	@Override

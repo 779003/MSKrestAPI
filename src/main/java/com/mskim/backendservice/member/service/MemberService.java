@@ -11,7 +11,6 @@ import com.google.gson.Gson;
 import com.mskim.backendservice.common.ApiInfoVo;
 import com.mskim.backendservice.common.Code;
 import com.mskim.backendservice.common.api.ApiServiceInterface;
-import com.mskim.backendservice.fish.vo.FishVo;
 import com.mskim.backendservice.member.dao.MemberDao;
 import com.mskim.backendservice.member.vo.MemberVo;
 import com.mskim.frontendService.apps.dao.AppsDao;
@@ -123,13 +122,8 @@ public class MemberService implements ApiServiceInterface {
 	}
 	
 	@Override
-	public boolean alreadyHasValue(String value) {
-		
-		if(memberDao.countId(value) > 0){
-			return true;
-		}else{
-			return false;
-		}	
+	public boolean alreadyHasValue(String memberId) {
+		return memberDao.countId(memberId) == 0 ? false : true;
 	}
 	
 	@Override

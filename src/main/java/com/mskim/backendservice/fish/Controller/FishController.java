@@ -41,45 +41,47 @@ public class FishController {
 			
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return fishService.resultWithCode(Code.NO_APIKEY);
+		}
 
-		}else if (requestVersion == null) {
+		if (requestVersion == null) {
 			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 
-		int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(viewsCount < 0){ //결과가 음수일 경우 코드값
+		int remainingViews = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+		if(remainingViews < 0){ //결과가 음수일 경우 코드값
 			
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+			int codeNumber = Math.abs(remainingViews);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
-			
-		}else if(viewsCount == 0){
-			
 			response.setStatus(HttpStatus.FORBIDDEN.value());
+			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
+			
+		}else if(remainingViews == 0){
+			
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.FORBIDDEN.value());
 			return fishService.resultWithCode(Code.EXCEEDED_CALL);
-		}else{
-			LogVo logInfo;
-			switch (requestVersion) {			
-				case VERSION_1:
-					logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-					request.setAttribute("logInfo", logInfo);					
-					fishService.callCount(apikey);
-					return gson.toJson(fishService.selectAllFish());
-				
-				default:
-					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-					request.setAttribute("logInfo", logInfo);					
-					response.setStatus(HttpStatus.BAD_REQUEST.value());
-					return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			}
-		}	
+		}
+		
+		LogVo logInfo;
+		switch (requestVersion) {
+		case VERSION_1:
+			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			fishService.callCount(apikey);
+			return gson.toJson(fishService.selectAllFish());
+
+		default:
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
+		}
 	}
 	
 	@RequestMapping(value ="/fish/{fish_seq}", 
@@ -95,54 +97,56 @@ public class FishController {
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return fishService.resultWithCode(Code.NO_APIKEY);
 		
-		}else if (requestVersion == null) {
+		}
+		
+		if (requestVersion == null) {
 					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			
 		}
 
-		int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(viewsCount < 0){ //결과가 음수일 경우 코드값
+		int remainingViews = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+		if(remainingViews < 0){ //결과가 음수일 경우 코드값
 			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+			int codeNumber = Math.abs(remainingViews);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
 			
-		}else if(viewsCount == 0){
+		}else if(remainingViews == 0){
 			
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
 			return fishService.resultWithCode(Code.EXCEEDED_CALL);
 			
-		}else{
-			LogVo logInfo;
+		}
 			
-			switch (requestVersion) {
-				case VERSION_1:						
-					if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
-						
-						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						fishService.callCount(apikey);
-						return gson.toJson(fishService.selectFish(parameterVo.getFish_seq()));					
-						
-					}else{
-							
-						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						return fishService.resultWithCode(parameterVo, Code.NO_RESULT_WITH_VALUE);
-					}
-			
-				default:
-					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-					request.setAttribute("logInfo", logInfo);
-					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-				}
+		LogVo logInfo;
+		switch (requestVersion) {
+		case VERSION_1:
+			if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
+
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				fishService.callCount(apikey);
+				return gson.toJson(fishService.selectFish(parameterVo.getFish_seq()));
+
+			} else {
+
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return fishService.resultWithCode(parameterVo, Code.NO_RESULT_WITH_VALUE);
+			}
+
+		default:
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 	}
 	
@@ -160,50 +164,50 @@ public class FishController {
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return fishService.resultWithCode(Code.NO_APIKEY);
 		
-		}else if (requestVersion == null) {
+		}
+
+		if (requestVersion == null) {
 					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 			
-		}else if(! fishService.dataMissingCheck(fishVo).equals("")) {
+		}
+
+		String missingField = fishService.dataMissingCheck(fishVo);
+		if (!missingField.equals("")) {
 			
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);			
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			
-			String missingField = fishService.dataMissingCheck(fishVo);
 			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+		}
 			
-		}else{
-			
-			int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-			if(viewsCount < 0){ //결과가 음수일 경우 코드값
-				response.setStatus(HttpStatus.FORBIDDEN.value());
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
-				request.setAttribute("logInfo", logInfo);
-				return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
-			}
-			
-			
-			
-			LogVo logInfo;			
-			switch (requestVersion) {
-			
-				case VERSION_1:					
-					logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-					request.setAttribute("logInfo", logInfo);
-					fishService.insertFish(fishVo);
-					response.setStatus(HttpStatus.CREATED.value());
-					return fishService.resultWithCode(fishVo, Code.INSERT);
-					
-				default:
-					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-					request.setAttribute("logInfo", logInfo);
-					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			}
+		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
+
+			int codeNumber = Math.abs(notValidKeyCode);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
+		}
+
+		LogVo logInfo;
+		switch (requestVersion) {
+		case VERSION_1:
+			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			fishService.insertFish(fishVo);
+			response.setStatus(HttpStatus.CREATED.value());
+			return fishService.resultWithCode(fishVo, Code.INSERT);
+
+		default:
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 	}
 	
@@ -219,47 +223,48 @@ public class FishController {
 			
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return fishService.resultWithCode(Code.NO_APIKEY);
-		
-		}else if (requestVersion == null) {
+		}
+
+		if (requestVersion == null) {
 					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
+		}
 			
-		}else{
-			
-			int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-			if(viewsCount < 0){ //결과가 음수일 경우 코드값
-				response.setStatus(HttpStatus.FORBIDDEN.value());
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
+
+			int codeNumber = Math.abs(notValidKeyCode);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
+		}
+
+		LogVo logInfo;
+		switch (requestVersion) {
+		case VERSION_1:
+			if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
+
+				fishService.deleteFish(parameterVo.getFish_seq());
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 				request.setAttribute("logInfo", logInfo);
-				return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
+				return fishService.resultWithCode(parameterVo, Code.DELETE);
+
+			}else{
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "API_USE");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return fishService.resultWithCode(parameterVo, Code.NO_VALUE_DELETE);
 			}
-			
-			LogVo logInfo;
-			switch (requestVersion) {			
-				case VERSION_1:
-					if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
-						
-						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						fishService.deleteFish(parameterVo.getFish_seq());
-						return fishService.resultWithCode(parameterVo, Code.DELETE);
-						
-					} else {	
-						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						return fishService.resultWithCode(parameterVo, Code.NO_VALUE_DELETE);
-					}
-					
-				default:
-					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-					request.setAttribute("logInfo", logInfo);
-					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			}
+
+		default:
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 	}
 	
@@ -276,68 +281,69 @@ public class FishController {
 			
 			response.setStatus(HttpStatus.UNAUTHORIZED.value());
 			return fishService.resultWithCode(Code.NO_APIKEY);
-		
-		}else if (requestVersion == null) {
+		}
+
+		if (requestVersion == null) {
 					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
 			request.setAttribute("logInfo", logInfo);
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			
-		}else if(! fishService.dataMissingCheck(fishVo).equals("")) {
-			
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3005.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
+		}
+
+		String missingField = fishService.dataMissingCheck(fishVo);
+		if (!missingField.equals("")) {
 			
-			String missingField = fishService.dataMissingCheck(fishVo);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 			
-		}else{
+		}
 
-			int viewsCount = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-			if(viewsCount < 0){ //결과가 음수일 경우 코드값
-				response.setStatus(HttpStatus.FORBIDDEN.value());
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(Math.abs(viewsCount)).getCode(), "API_USE");
+		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
+		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
+
+			int codeNumber = Math.abs(notValidKeyCode);
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.FORBIDDEN.value());
+			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
+		}
+
+		if (!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
+
+			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.BAD_REQUEST.value());
+			return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_3004);
+		}
+
+		LogVo logInfo;
+		switch (requestVersion) {
+
+		case VERSION_1:
+			if (fishService.alreadyHasValue(fishVo.getFish_seq())) {
+
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
 				request.setAttribute("logInfo", logInfo);
-				return fishService.resultWithCode(Code.getCodeByCodeNumber(Math.abs(viewsCount)));
-			}
-			
-			if (!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
-				
-				LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
+				fishService.updateFish(fishVo);
+				return fishService.resultWithCode(fishVo, Code.UPDATE);
+
+			}else{
+
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "API_USE");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
-				return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_3004);
+				return fishService.resultWithCode(fishVo, Code.NO_VALUE_UPDATE);
 			}
-			
-			LogVo logInfo;
-			switch (requestVersion) {
-			
-				case VERSION_1:	
-					if (fishService.alreadyHasValue(fishVo.getFish_seq())) {
-						
-						logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						fishService.updateFish(fishVo);
-						return fishService.resultWithCode(fishVo, Code.UPDATE);
-						
-					} else {
-						
-						logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "API_USE");
-						request.setAttribute("logInfo", logInfo);
-						response.setStatus(HttpStatus.BAD_REQUEST.value());
-						return fishService.resultWithCode(fishVo, Code.NO_VALUE_UPDATE);
-					}
-					
-				default:
-					
-					logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-					request.setAttribute("logInfo", logInfo);
-					response.setStatus(HttpStatus.NOT_FOUND.value());
-					return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-				}
+
+		default:
+
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			request.setAttribute("logInfo", logInfo);
+			response.setStatus(HttpStatus.NOT_FOUND.value());
+			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
 		}
 	}
-	
 }

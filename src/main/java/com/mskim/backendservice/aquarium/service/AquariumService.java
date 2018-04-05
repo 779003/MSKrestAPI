@@ -43,7 +43,7 @@ public class AquariumService implements ApiServiceInterface {
 		ApiInfoVo info = new ApiInfoVo(aquariumVo.getVersion(), code);
 		
 		if(code.equals(Code.NO_RESULT_WITH_VALUE)){
-			String reMessage = String.format(code.getMessage(), aquariumVo.getAquarium_name());
+			String reMessage = String.format(code.getMessage(), aquariumVo.getAquarium_seq());
 			info.setMessage(reMessage);
 		}
 		
@@ -176,5 +176,9 @@ public class AquariumService implements ApiServiceInterface {
 	
 	public int countAquarium(String aquariumSeq){
 		return aquariumDao.countAquarium(aquariumSeq);
+	}
+	
+	public String test (ApiServiceInterface ainter) {
+		return ainter.resultWithCode(Code.BAD_DATA);
 	}
 }

@@ -29,6 +29,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             	currUrl= "/apps";
             }
             HttpSession session = request.getSession(false);
+            
+            if(session == null) {
+            	response.sendRedirect("/usr/login?currUrl=" + currUrl);
+            	return false;
+            }
+            
             if(loginService.getLoginMember(session) == null){
             	response.sendRedirect("/usr/login?currUrl=" + currUrl);
             	return false;
@@ -41,8 +47,5 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         	return false;
         }
 	}
-
-	
-	
 	
 }

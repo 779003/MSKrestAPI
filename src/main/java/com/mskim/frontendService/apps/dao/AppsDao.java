@@ -28,6 +28,10 @@ public class AppsDao{
 		return sqlsession.selectList("apps.selectAllApps", memberId);
 	}
 
+	public int countAllApps(String memberId){
+		return sqlsession.selectOne("apps.countAllApps", memberId);
+	}
+	
 	public List<ApiListVo> selectApiList(String permission_level) {
 		return sqlsession.selectList("apps.selectApiList", permission_level);
 	}
@@ -42,6 +46,14 @@ public class AppsDao{
 
 	public void updateApp(AppsVo appsVo) {
 		sqlsession.update("apps.updateApp", appsVo);
+	}
+	
+	public void deleteApp(String apiKey) {
+		sqlsession.delete("apps.deleteApp", apiKey);
+	}
+	
+	public void deleteQuota(String apiKey) {
+		sqlsession.delete("apps.deleteQuota", apiKey);
 	}
 
 	public int appUsrCheck(HashMap<String, String> usrInfo) {
@@ -63,5 +75,4 @@ public class AppsDao{
 	public void callCount(String apiKey){
 		sqlsession.selectOne("apps.callCount", apiKey);
 	}
-	
 }

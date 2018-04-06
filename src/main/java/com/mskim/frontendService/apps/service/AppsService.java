@@ -32,6 +32,10 @@ public class AppsService {
 		return appsDao.selectAllApps(memberId);
 	}
 	
+	public int countAllApps(String memberId){
+		return appsDao.countAllApps(memberId);
+	}
+	
 	public List<ApiListVo> selectApiList(String permission_level){
 		return appsDao.selectApiList(permission_level);
 	}
@@ -46,6 +50,11 @@ public class AppsService {
 	
 	public void updateApp(AppsVo appsVo){
 		appsDao.updateApp(appsVo);
+	}
+
+	public void deleteAppAndQuota(String apiKey){
+		appsDao.deleteQuota(apiKey);
+		appsDao.deleteApp(apiKey);
 	}
 	
 	public int appUsrCheck(HashMap<String, String> usrInfo) {

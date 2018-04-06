@@ -58,6 +58,20 @@
 		AND	B.api_seq = C.api_seq
 		ORDER BY A.reg_dt ASC
 	</select>
+	
+	<select id="countAllApps" parameterType="String" resultType="int">
+		SELECT 
+			count(*)
+		FROM 
+			tn_apps A, 
+			tn_api_quota B,
+			tn_api_list C
+		WHERE 
+			A.member_id = #{value}
+		AND A.api_key = B.api_key
+		AND	B.api_seq = C.api_seq
+	</select>
+
 	<select id="selectApp" parameterType="String" resultType="Apps">
 		SELECT 			
 			api_allow,
@@ -83,6 +97,20 @@
 		WHERE 
 			api_key = #{api_key}
 	</update>
+
+	<delete id="deleteQuota" parameterType="String">
+		DELETE FROM 
+			tn_api_quota 
+		WHERE 
+			api_key = #{value}
+	</delete>
+			
+	<delete id="deleteApp" parameterType="String">
+		DELETE FROM 
+			tn_apps 
+		WHERE 
+			api_key = #{value}
+	</delete>
 
 	<select id="selectApiList" parameterType="String" resultType="ApiList">
 	 <![CDATA[

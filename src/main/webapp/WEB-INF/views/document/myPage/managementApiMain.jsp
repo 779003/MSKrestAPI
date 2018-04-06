@@ -4,7 +4,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-        
 <h3>내 API 사용 관리</h3>
 
 <div id="container">
@@ -105,7 +104,7 @@
 						<div align="right">
 							<div class="btn-group" role="group" >
 							  <button type="button" class="btn btn-default" onclick="javascript:location.href ='/apps/modify/${app.api_key}'">수정하기</button>
-							  <button type="button" class="btn btn-default">삭제하기</button>
+							  <button type="button" class="btn btn-default" onclick="javascript:location.href ='/apps/delete/${app.api_key}'">삭제하기</button>
 							</div>
 						</div>	
 					</div>
@@ -136,5 +135,9 @@
 <hr>
 <div class="alert alert-success" role="alert"><a href="/apps/register">오픈 API 신청</a></div>
 
-
+<c:if test="${!empty alert}">
+	<script>
+		alert("${alert}");
+	</script>
+ </c:if> 
 

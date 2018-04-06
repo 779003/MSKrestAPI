@@ -3,6 +3,7 @@ package com.mskim.frontendService.apps.controller;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mskim.backendservice.common.api.ApiKeyService;
 import com.mskim.frontendService.apps.service.AppsService;
@@ -32,7 +34,7 @@ public class AppsController {
 	
 	
 	@RequestMapping(value="")
-	public String appManagementMain(Model model, HttpSession session){
+	public String appManagementMain(Model model, HttpSession session, HttpServletRequest request){
 		
 		String memberPermissionLevel = loginService.getLoginMember(session).getPermission_level();
 		
@@ -57,7 +59,14 @@ public class AppsController {
 	}
 		
 	@RequestMapping(value="/register", method = RequestMethod.GET)
-	public String appRegisterPage(Model model, HttpSession session){
+	public String appRegisterPage(Model model, HttpSession session, RedirectAttributes redirectAttr){
+		
+		String memberId = loginService.getLoginMember(session).getId();
+		
+		if(appsService.countAllApps(memberId) >=5) {
+			redirectAttr.addFlashAttribute("alert", "어플리케이션은 최대 5개까지만 만드실 수 있습니다.");
+			return "redirect:/apps";
+		}
 		
 		model.addAttribute("ssMemberId",loginService.getLoginMember(session).getId());
 		model.addAttribute("api_list", appsService.selectApiList(loginService.getLoginMember(session).getPermission_level()));
@@ -83,16 +92,17 @@ public class AppsController {
 	}
 	
 	@RequestMapping(value="/modify/{apiKey}", method = RequestMethod.GET)
-	public String modifyAppPage(HttpSession session, Model model, @PathVariable String apiKey){
+	public String modifyAppPage(HttpSession session, Model model, @PathVariable String apiKey, RedirectAttributes redirectAttr){
 		
 		String memberId = loginService.getLoginMember(session).getId();
-
+		
 		HashMap<String, String> usrInfo = new HashMap<String, String>();
 		usrInfo.put("api_key", apiKey);
 		usrInfo.put("member_id", memberId);
 		
 		if(appsService.appUsrCheck(usrInfo) == 0){
-			return "redirect:/error/400";
+			redirectAttr.addFlashAttribute("alert", "잘못된 접근입니다.");
+			return "redirect:/apps";
 		}
 		
 			model.addAttribute("ssMemberId", memberId);
@@ -108,7 +118,7 @@ public class AppsController {
 	}
 	
 	@RequestMapping(value="/modify", method = RequestMethod.POST)
-	public String modifyApp(HttpSession session, AppsVo appsVo){
+	public String modifyApp(HttpSession session, AppsVo appsVo, RedirectAttributes redirectAttr){
 		
 		String memberId = loginService.getLoginMember(session).getId();
 
@@ -117,9 +127,30 @@ public class AppsController {
 		usrInfo.put("member_id", memberId);
 		
 		if(appsService.appUsrCheck(usrInfo) == 0){
+			redirectAttr.addFlashAttribute("alert", "잘못된 접근입니다.");
 			return "redirect:/apps";
 		}else{
 			appsService.updateApp(appsVo);
+			redirectAttr.addFlashAttribute("alert", "정상적으로 수정되었습니다.");
+			return "redirect:/apps";
+		}
+	}
+	
+	@RequestMapping(value="/delete/{apiKey}", method = RequestMethod.GET)
+	public String deleteApp(HttpSession session, RedirectAttributes redirectAttr, @PathVariable String apiKey){
+		
+		String memberId = loginService.getLoginMember(session).getId();
+		
+		HashMap<String, String> usrInfo = new HashMap<String, String>();
+		usrInfo.put("api_key", apiKey);
+		usrInfo.put("member_id", memberId);
+		
+		if(appsService.appUsrCheck(usrInfo) == 0){
+			redirectAttr.addFlashAttribute("alert", "잘못된 접근입니다.");
+			return "redirect:/apps";
+		}else{
+			appsService.deleteAppAndQuota(apiKey);
+			redirectAttr.addFlashAttribute("alert", "정상적으로 삭제되었습니다.");
 			return "redirect:/apps";
 		}
 	}

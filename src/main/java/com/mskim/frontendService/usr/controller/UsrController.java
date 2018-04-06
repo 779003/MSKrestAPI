@@ -65,5 +65,13 @@ public class UsrController {
 		
 		return "redirect:/docs";
 	}
+
+	@RequestMapping(value="/register", method = RequestMethod.GET)
+	public String register(Model model, HttpSession session){
+		session.removeAttribute("loginSession");
+		
+		return "usr/registerUsr";
+	}
+	
 	
 }

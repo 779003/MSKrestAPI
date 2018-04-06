@@ -40,6 +40,7 @@
         <div class="text-center">
           <a class="d-block small mt-3" href="/usr/register">회원가입</a>
           <a class="d-block small" href="/usr/findPassword">비밀번호 찾기</a>
+          <a class="d-block small" href="/docs">메인으로 이동</a>
         </div>
       </div>
     </div>

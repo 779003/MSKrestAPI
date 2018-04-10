@@ -9,8 +9,8 @@
  	 <meta name="author" content="">
   	<title>mskim Backend Service Document</title>
  
- 	  <link href="/bootstrap/bootstrap/css/bootstrap.css?ver=<%=new java.util.Date()%>" rel="stylesheet">   	  
- 	  <link href="/bootstrap/bootstrap/css/bootstrap.min.css?ver=<%=new java.util.Date()%>" rel="stylesheet">  
+ 	<link href="/bootstrap/bootstrap/css/bootstrap.css?ver=<%=new java.util.Date()%>" rel="stylesheet">   	  
+ 	<link href="/bootstrap/bootstrap/css/bootstrap.min.css?ver=<%=new java.util.Date()%>" rel="stylesheet">  
  	<link href="/bootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
  	<link href="/css/sb-admin.css" rel="stylesheet">
   	<link href="/css/docContainer.css?ver=<%=new java.util.Date()%>" rel="stylesheet">

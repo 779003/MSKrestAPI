@@ -187,7 +187,7 @@ public class MemberService implements ApiServiceInterface {
 	 * @return 성공여부 int
 	 */
 	public int insertMember(MemberVo memberVo) {
-		
+		memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode()));
 		return memberDao.insertMember(memberVo);
 	}
 
@@ -204,10 +204,21 @@ public class MemberService implements ApiServiceInterface {
 	/**
 	 * 멤버 수정
 	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 성공여부 int
 	 */
-	public int updateMember(MemberVo memberVo) {
+	public void updateMember(MemberVo memberVo) {
+		if(! memberVo.getPassword().equals("")) {
+			memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode()));
+		}
+		memberDao.updateMember(memberVo);
+	}
+	
+	public boolean questionAndAnswer(MemberVo memberVo) {
 		
-		return memberDao.updateMember(memberVo);
+		return memberDao.questionAndAnswer(memberVo) == 0 ? false : true;
+	}
+	
+	public void resetPassword(MemberVo memberVo) {
+		memberVo.setPassword(Integer.toString(memberVo.getId().hashCode()));
+		memberDao.resetPassword(memberVo);
 	}
 }

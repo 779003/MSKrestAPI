@@ -80,7 +80,7 @@
 				
 				<c:otherwise>
 				<!-- 알림 -->
-					<li class="nav-item dropdown">
+				<!-- 	<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								<i class="fa fa-fw fa-bell"></i>
 							<span class="d-lg-none">알림
@@ -112,7 +112,7 @@
 							<div class="dropdown-message small">환영합니다 ^^@@@@@@@ </div>
 							</a>
 						</div>
-					</li>
+					</li> -->
 						
 					<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle mr-lg-2" id="myPageDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -120,7 +120,7 @@
 					</a>
 					<div class="dropdown-menu" aria-labelledby="myPageDropdown" style="left: -30%;">
 					
-					<a class="dropdown-item" href="#">
+					<a class="dropdown-item" href="/usr/modify">
 					<span class="text-success">
 					<i class="fas fa-user-circle"></i> <strong>&nbsp;내 정보 수정</strong>
 					</span>              

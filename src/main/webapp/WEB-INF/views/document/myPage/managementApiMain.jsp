@@ -135,9 +135,5 @@
 <hr>
 <div class="alert alert-success" role="alert"><a href="/apps/register">오픈 API 신청</a></div>
 
-<c:if test="${!empty alert}">
-	<script>
-		alert("${alert}");
-	</script>
- </c:if> 
+
 

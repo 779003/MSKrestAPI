@@ -64,10 +64,9 @@ public class MemberDao{
 	/**
 	 * 멤버 수정
 	 * @param memberVo {@link MemberVo} 멤버 VO
-	 * @return 성공여부 int
 	 */
-	public int updateMember(MemberVo memberVo) {
-		return sqlsession.update("member.updateMember", memberVo);
+	public void updateMember(MemberVo memberVo) {
+		sqlsession.update("member.updateMember", memberVo);
 	}
 
 	/**
@@ -79,6 +78,12 @@ public class MemberDao{
 		return sqlsession.selectOne("member.countId", memberId);
 	}
 
+	public int questionAndAnswer(MemberVo memberVo) {
+		return sqlsession.selectOne("member.questionAndAnswer", memberVo);
+	}
 	
+	public void resetPassword(MemberVo memberVo) {
+		sqlsession.update("member.resetPassword", memberVo);
+	}
 
 }

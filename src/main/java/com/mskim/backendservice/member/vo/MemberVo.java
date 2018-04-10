@@ -15,8 +15,8 @@ public class MemberVo extends ApiInfoVo {
 	private String name;
 	private String gender;
 	private String permission_level;
-	private String question;
-	private String answer;
+	private String question ="";
+	private String answer ="";
 	
 	public MemberVo() {
 	}

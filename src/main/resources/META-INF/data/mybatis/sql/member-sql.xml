@@ -22,7 +22,9 @@
 			  id
 			, name
 			, gender
-			, permission_level  
+			, permission_level
+			, question
+			, answer  
 		FROM 
 			tn_member	
 		WHERE 	
@@ -35,12 +37,18 @@
 				  id
 				, name
 				, gender
-				, password)
+				, password
+				, question
+				, answer
+				)
 		VALUES(
 			  #{id}
 			, #{name}
 			, #{gender}
-			, #{password})
+			, #{password}
+			, #{question}
+			, #{answer}
+			)
 	</insert>
 
 	<delete id="deleteMember" parameterType="String">
@@ -55,8 +63,14 @@
 			tn_member 
 		SET 
 			name = #{name}, 
-			gender = #{gender} 
-			where id = #{id}
+			gender = #{gender},
+			question = #{question},
+			answer = #{answer}
+	<if test="password != null and password != ''">
+		  , password = #{password}
+	</if>
+		WHERE 
+			id = #{id}
 	</update>
 	
 	<select id="countId" parameterType="String" resultType="int">
@@ -67,5 +81,24 @@
 		WHERE 
 			id = #{id}
 	</select>
+
+	<select id="questionAndAnswer" parameterType="Member" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM 
+			tn_member 
+		WHERE 
+			id = #{id}
+		AND question = #{question}
+		AND answer = #{answer}	
+	</select>
 	
+	<update id="resetPassword" parameterType="Member">
+		UPDATE 
+			tn_member 
+		SET 
+			password = #{password} 
+		WHERE 
+			id = #{id}
+	</update>
 </mapper>

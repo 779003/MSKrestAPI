@@ -248,9 +248,8 @@ public class MemberController{
 		}
 
 		LogVo logInfo;
-		memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode()));
 		switch (requestVersion) {
-
+		
 		case VERSION_1:
 			if (memberService.alreadyHasValue(memberVo.getId())) {
 

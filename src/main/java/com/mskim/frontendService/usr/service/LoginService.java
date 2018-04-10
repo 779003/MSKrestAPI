@@ -16,6 +16,7 @@ public class LoginService {
 	LoginDao loginDao;
 	
 	public int memberLogin(MemberVo memberVo){
+		memberVo.setPassword(Integer.toString(memberVo.getPassword().hashCode()));
 		return loginDao.memberLogin(memberVo);
 	}
 	

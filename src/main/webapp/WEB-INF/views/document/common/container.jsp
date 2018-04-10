@@ -42,4 +42,10 @@
 			<i class="fa fa-angle-up"></i>
 		</a>
 	</div>
+	
+	<c:if test="${!empty alert}">
+		<script>
+			alert("${alert}");
+		</script>
+ 	</c:if>  
 </body>

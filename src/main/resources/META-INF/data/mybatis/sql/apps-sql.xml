@@ -28,8 +28,8 @@
 			#{api_key}, 
 			#{member_id}, 
 			#{api_allow},
-			sysdate,
-			sysdate,
+			sysdate + 9/24,
+			sysdate + 9/24,
 			#{app_name},
 			#{description},
 			#{api_seq}
@@ -93,7 +93,7 @@
 			app_name =#{app_name}, 
 			use_yn =#{use_yn}, 
 			description = #{description},
-			mod_dt = sysdate
+			mod_dt = sysdate + 9/24
 		WHERE 
 			api_key = #{api_key}
 	</update>

@@ -20,7 +20,7 @@
 			#{api_key},   
 			#{api_seq},   
 			#{referer},   
-			SYSDATE,
+			SYSDATE + 9/24,
 			#{success},   
 			#{remote_host},
 			#{request_url},

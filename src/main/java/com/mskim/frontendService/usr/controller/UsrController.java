@@ -77,7 +77,7 @@ public class UsrController {
 		}
 	}
 	
-	@RequestMapping(value="/validCheck/id", method = RequestMethod.GET)
+	@RequestMapping(value="/validCheck/id", method = RequestMethod.POST)
 	public @ResponseBody boolean idCheck(String memberId) {
 		return memberService.alreadyHasValue(memberId);
 	}

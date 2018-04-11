@@ -23,4 +23,5 @@
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 	<script src="/js/docContainer.js?v=2"></script>
 	<script src="/js/usrPage.js?ver=<%=new java.util.Date()%>"></script>
+	<script src="/js/appsPage.js?ver=<%=new java.util.Date()%>"></script>
 </head>

@@ -7,7 +7,7 @@ function findPasswordFormCommit() {
 		return false;
 	}
 	
-	if (id.val().length >= 10) {
+	if (id.val().length >= 11) {
 		alert("아이디는 10자 이하로 입력해주세요.");
 		id.val("");
 		id.focus();
@@ -26,7 +26,7 @@ function loginFormCommit() {
 		return false;
 	}
 	
-	if (id.val().length >= 10) {
+	if (id.val().length >= 11) {
 		alert("아이디는 10자 이하로 입력해주세요.");
 		password.val("");
 		id.val("");
@@ -148,25 +148,25 @@ function registerUsrFormCommit(){
 		id.focus();
 		return false;
 	}
-	if (id.val().length >= 10) {
+	if (id.val().length >= 11) {
 		alert("아이디는 10자 이하로 입력해주세요.");
 		id.val("");
 		id.focus();
 		return false;
 	}
-	if (password.val().length >= 10) {
+	if (password.val().length >= 11) {
 		alert("비밀번호는 10자 이하로 입력해주세요.");
 		password.val("");
 		password.focus();
 		return false;
 	}
-	if (question.val().length >= 10) {
+	if (question.val().length >= 11) {
 		alert("힌트는 50자 이하로 입력해주세요.");
 		question.val("");
 		question.focus();
 		return false;
 	}
-	if (answer.val().length >= 10) {
+	if (answer.val().length >= 11) {
 		alert("힌트에 대한 답은 50자 이하로 입력해주세요.");
 		answer.val("");
 		answer.focus();

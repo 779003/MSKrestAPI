@@ -8,7 +8,6 @@
 		본 서비스는 처리 결과 및 장애에 대한 코드와 설명을 제공합니다.<br> 
 		아래 내용에서 확인하세요.
 	</p>
-	<br> <br> <br> <br>
 	<table>
 	<colgroup width="84"></colgroup>
 	<colgroup width="263"></colgroup>

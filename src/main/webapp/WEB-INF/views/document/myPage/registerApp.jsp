@@ -7,7 +7,7 @@
 <center>
 	<h1>애플리케이션 등록 (API 이용신청)</h1>
 	API를 사용할 애플리케이션 정보를 입력하시면 인증Key를 발급해드립니다. <br> 
-	인증Key는 API서비스 이용허가를	받은 사람임을 식별할 수 있도록 사용자에게 개별적으로 할당하는 공유한 값입니다.
+	인증Key는 API서비스 이용허가를	받은 사람임을 식별할 수 있도록 사용자에게 개별적으로 할당하는 고유한 값입니다.
 	<div class="tabcontent current">
 		<form action="/apps/register" method="post" id="registerForm">
 			<table class="appInfoTable" style="width: 100%;">

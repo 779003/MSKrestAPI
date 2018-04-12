@@ -30,10 +30,10 @@
 					<li><a href="/docs/api-use">API 호출</a></li>
 				</ul></li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
-				title="국내 수족관 지도 API"><a
+				title="국내 수족관 정보 API"><a
 				class="nav-link nav-link-collapse collapsed" data-toggle="collapse"
 				href="#collapseComponents" data-parent="#exampleAccordion"> 
-				<span class="nav-link-text">국내 수족관 지도 API</span>
+				<span class="nav-link-text">국내 수족관 정보 API</span>
 			</a>
 				<ul class="sidenav-second-level collapse" id="collapseComponents">
 					<li>

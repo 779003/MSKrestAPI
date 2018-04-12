@@ -79,3 +79,7 @@ ul.tab li.current {
 	background-color: rgb(247, 236, 202);
 	border-radius: 0.5rem;
 }
+
+.DocsContents {
+	text-align: center;
+}

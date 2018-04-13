@@ -114,11 +114,11 @@
 	<br />
 	<div class="separator" style="clear: both; text-align: center;">
 		<a
-			href="https://3.bp.blogspot.com/-fCvyXoZM9ho/Ws6rBIRwDkI/AAAAAAAAAKg/mMqqijKGVXgSvWnazForjGWSb_p39VHjACLcBGAs/s1600/WIN_20180412_01_04_20_Pro.jpg"
+			href="https://3.bp.blogspot.com/-seWtjiCv4cs/Ws9KCXtDDfI/AAAAAAAAAMU/YasU9gTkjO8Y01y9jZ8mGFo-GqQhQLoCwCLcBGAs/s400/KakaoTalk_20180412_205137021.jpg"
 			imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img
 			border="0" data-original-height="1031" data-original-width="531"
 			height="320"
-			src="https://3.bp.blogspot.com/-fCvyXoZM9ho/Ws6rBIRwDkI/AAAAAAAAAKg/mMqqijKGVXgSvWnazForjGWSb_p39VHjACLcBGAs/s320/WIN_20180412_01_04_20_Pro.jpg"
+			src="https://3.bp.blogspot.com/-seWtjiCv4cs/Ws9KCXtDDfI/AAAAAAAAAMU/YasU9gTkjO8Y01y9jZ8mGFo-GqQhQLoCwCLcBGAs/s400/KakaoTalk_20180412_205137021.jpg"
 			width="164" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">

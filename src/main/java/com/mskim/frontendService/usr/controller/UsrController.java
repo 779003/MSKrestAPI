@@ -139,7 +139,10 @@ public class UsrController {
 		if(!memberVo.getId().equals(sessionMemberVo.getId())) {
 			redirectAttr.addFlashAttribute("alert", "잘못된 접근입니다.");
 		}
+		
 		memberService.updateMember(memberVo);
+		session.setAttribute("loginSession", memberService.selectMember(memberVo.getId()));
+		 
 		redirectAttr.addFlashAttribute("alert", "정보 수정이 완료되었습니다.");
 		return "redirect:/docs";
 	}

@@ -33,6 +33,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="/js/usrPage.js"></script>
 	</div>	
 	<c:if test="${!empty alert}">
 		<script>

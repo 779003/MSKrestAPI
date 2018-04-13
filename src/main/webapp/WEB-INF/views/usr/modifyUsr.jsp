@@ -65,6 +65,7 @@
 				</div>
 			</div>
 		</div>
+		<script src="/js/usrPage.js"></script>
 	</div>
 </body>
 </html>

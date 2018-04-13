@@ -3,7 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>	
 <!DOCTYPE>
 <html>
+
 <jsp:include page="/WEB-INF/views/document/common/header.jsp" />
+
 <body class="bg-dark">
 	<div class="container">
 		<div class="card card-login mx-auto mt-5">
@@ -37,5 +39,6 @@
 			alert("${alert}");
 		</script>
 	</c:if>
+<script src="/js/usrPage.js"></script>	
 </body>
 </html>

@@ -40,6 +40,11 @@
 		<a class="scroll-to-top rounded" href="#page-top"> 
 			<i class="fa fa-angle-up"></i>
 		</a>
+		
+	<script src="/js/sb-admin.min.js"></script>
+	<script src="/js/docContainer.js"></script>
+	<script src="/js/appsPage.js"></script>
+	
 	</div>
 	<c:if test="${!empty alert}">
 		<script>

@@ -18,5 +18,6 @@
 	 	<mapper resource="META-INF/data/mybatis/sql/apps-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/log-sql.xml" /> 
 	 	<mapper resource="META-INF/data/mybatis/sql/aquarium-sql.xml" /> 
+	 	<mapper resource="META-INF/data/mybatis/sql/stats-sql.xml" /> 
 	</mappers>
 </configuration>

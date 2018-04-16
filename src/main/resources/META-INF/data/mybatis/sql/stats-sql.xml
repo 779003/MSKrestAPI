@@ -60,7 +60,8 @@
                AND accept_time BETWEEN #{startDate} AND #{endDate}
                AND success = 'FAILURE')
 	</select>
-	<select id="statsCall" parameterType="String" resultType="hashmap">
+	
+	<select id="statsCall" parameterType="hashmap" resultType="hashmap">
 		SELECT 
 			call_count, 
 			log_date 

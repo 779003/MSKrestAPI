@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="stats">
+
+	<select id="appList" parameterType="String" resultType="hashmap">
+	SELECT A.api_key,
+         A.app_name,
+         A.api_seq,
+         A.reg_dt,
+         A.mod_dt,
+         NVL (B.call_count_TOTAL, 0) AS call_count_TOTAL
+    FROM (SELECT app_name,
+                 api_seq,
+                 api_key,
+                 reg_dt,
+                 mod_dt
+            FROM tn_apps
+           WHERE member_id = #{value}) A,
+         (  SELECT api_key, SUM (call_count) AS call_count_TOTAL
+              FROM tn_api_quota_log
+             WHERE api_key IN (SELECT api_key
+                                 FROM tn_apps
+                                WHERE member_id = #{value})
+          GROUP BY api_key) B
+   	WHERE A.api_key = B.api_key(+)
+	ORDER BY reg_dt ASC
+	</select>
+	
+	<select id="statsDetailMain" parameterType="String" resultType="hashmap">
+		SELECT 
+			app_name, 
+			api_seq, 
+			api_key,
+			reg_dt,
+			mod_dt 
+		FROM 
+			tn_apps 
+		WHERE 
+			api_key = #{value}
+	</select>
+	
+	<select id="statsToday" parameterType="hashmap" resultType="hashmap">
+		SELECT *
+  FROM (SELECT call_count
+          FROM tn_api_quota
+         WHERE api_key = #{apiKey}),
+       (SELECT MAX (remote_host) AS top_host
+          FROM tn_api_log
+         WHERE accept_time BETWEEN #{startDate} AND #{endDate}),
+       (SELECT COUNT (*) AS SUCCESS_COUNT
+          FROM tn_api_log
+         WHERE api_key = #{apiKey}
+               AND accept_time BETWEEN #{startDate} AND #{endDate}
+               AND success = 'SUCCESS'),
+       (SELECT COUNT (*) AS FAILURE_COUNT
+          FROM tn_api_log
+         WHERE     api_key = #{apiKey}
+               AND accept_time BETWEEN #{startDate} AND #{endDate}
+               AND success = 'FAILURE')
+	</select>
+	<select id="statsCall" parameterType="String" resultType="hashmap">
+		SELECT 
+			call_count, 
+			log_date 
+		FROM 
+			tn_api_quota_log 
+		where 
+			log_date between #{startDate} AND #{endDate}
+	</select>
+	
+	<select id="statsError" parameterType="String" resultType="hashmap">
+		SELECT 
+			error_code, 
+			COUNT(*) AS count 
+		FROM 
+			tn_api_log 
+		WHERE 
+			api_key = #{value}  
+		AND success = 'FAILURE' 
+		GROUP BY 
+			error_code 
+		ORDER BY 
+			count DESC
+	</select>
+	
+	<select id="statsReferer" parameterType="String" resultType="hashmap">
+		SELECT 
+			NVL(referer,'리퍼러없음') AS referer, 
+			COUNT(*) AS referer_count 
+		FROM tn_api_log 
+		WHERE 
+			api_key = #{value}
+		GROUP BY 
+			referer 
+		ORDER BY 
+			referer_count DESC
+	</select>
+	
+	<select id="statsLogList" parameterType="String" resultType="hashmap">
+		SELECT 
+			api_key,
+			request_url,
+			referer,
+			remote_host, 
+			success, 
+			error_code, 
+			accept_time 
+		FROM 
+			tn_api_log
+ 		WHERE 
+ 			api_key = #{value}
+ 	ORDER BY 
+ 		accept_time DESC
+	</select>
+</mapper>

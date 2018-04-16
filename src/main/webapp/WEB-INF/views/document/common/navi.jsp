@@ -126,7 +126,7 @@
 									<strong>&nbsp;Open API 사용 관리</strong>
 								</span>
 							</a> 
-							<a class="dropdown-item" href="#"> 
+							<a class="dropdown-item" href="/stats/main"> 
 								<span class="text-success"> 
 									<i class="fas fa-chart-bar"></i> 
 									<strong>&nbsp;내 Open API 통계</strong>

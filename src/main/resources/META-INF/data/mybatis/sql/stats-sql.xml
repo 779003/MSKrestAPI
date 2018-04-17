@@ -10,7 +10,7 @@
          A.api_seq,
          A.reg_dt,
          A.mod_dt,
-         NVL (B.call_count_TOTAL, 0) AS call_count_TOTAL
+         NVL (B.call_count_TOTAL, 0) AS call_count_total
     FROM (SELECT app_name,
                  api_seq,
                  api_key,
@@ -18,7 +18,7 @@
                  mod_dt
             FROM tn_apps
            WHERE member_id = #{value}) A,
-         (  SELECT api_key, SUM (call_count) AS call_count_TOTAL
+         (  SELECT api_key, SUM (call_count) AS call_count_total
               FROM tn_api_quota_log
              WHERE api_key IN (SELECT api_key
                                  FROM tn_apps
@@ -41,24 +41,29 @@
 			api_key = #{value}
 	</select>
 	
-	<select id="statsToday" parameterType="hashmap" resultType="hashmap">
-		SELECT *
-  FROM (SELECT call_count
-          FROM tn_api_quota
-         WHERE api_key = #{apiKey}),
-       (SELECT MAX (remote_host) AS top_host
-          FROM tn_api_log
-         WHERE accept_time BETWEEN #{startDate} AND #{endDate}),
-       (SELECT COUNT (*) AS SUCCESS_COUNT
-          FROM tn_api_log
-         WHERE api_key = #{apiKey}
-               AND accept_time BETWEEN #{startDate} AND #{endDate}
-               AND success = 'SUCCESS'),
-       (SELECT COUNT (*) AS FAILURE_COUNT
-          FROM tn_api_log
-         WHERE     api_key = #{apiKey}
-               AND accept_time BETWEEN #{startDate} AND #{endDate}
-               AND success = 'FAILURE')
+	<select id="statsToday" parameterType="String" resultType="hashmap">
+		SELECT * FROM   
+      (SELECT call_count
+         FROM tn_api_quota
+        WHERE api_key = #{value}),
+    (SELECT remote_host AS top_host FROM
+        (SELECT remote_host, COUNT(*) AS cnt 
+           FROM tn_api_log 
+          WHERE api_key = #{value}
+        	AND TO_CHAR(accept_time, 'YYYYMMDD') = TO_CHAR(SYSDATE + 9/24, 'YYYYMMDD') 
+       GROUP BY remote_host 
+       ORDER BY cnt DESC)
+     WHERE ROWNUM=1),
+    (SELECT COUNT (*) AS success_count
+       FROM tn_api_log
+      WHERE api_key = #{value}
+        AND TO_CHAR(accept_time, 'YYYYMMDD') = TO_CHAR(sysdate + 9/24, 'YYYYMMDD')
+        AND success = 'SUCCESS'),
+    (SELECT COUNT (*) AS failure_count
+       FROM tn_api_log
+      WHERE api_key = #{value}
+        AND TO_CHAR(accept_time, 'YYYYMMDD') = TO_CHAR(sysdate + 9/24, 'YYYYMMDD')
+        AND success = 'FAILURE')
 	</select>
 	
 	<select id="statsCall" parameterType="hashmap" resultType="hashmap">
@@ -68,31 +73,35 @@
 		FROM 
 			tn_api_quota_log 
 		where 
-			log_date between #{startDate} AND #{endDate}
+			log_date BETWEEN to_date(#{stDt}, 'YYYY-MM-DD') AND to_date(#{edDt}, 'YYYY-MM-DD') + 0.99999
+        AND 
+            API_KEY = #{apiKey}
 	</select>
 	
-	<select id="statsError" parameterType="String" resultType="hashmap">
+	<select id="statsError" parameterType="hashmap" resultType="hashmap">
 		SELECT 
 			error_code, 
-			COUNT(*) AS count 
+			COUNT(*) AS error_count 
 		FROM 
 			tn_api_log 
 		WHERE 
-			api_key = #{value}  
+			api_key = #{apiKey}  
 		AND success = 'FAILURE' 
+		AND accept_time BETWEEN to_date(#{stDt}, 'YYYY-MM-DD') AND to_date(#{edDt}, 'YYYY-MM-DD') + 0.99999	
 		GROUP BY 
 			error_code 
 		ORDER BY 
-			count DESC
+			error_count DESC
 	</select>
 	
-	<select id="statsReferer" parameterType="String" resultType="hashmap">
+	<select id="statsReferer" parameterType="hashmap" resultType="hashmap">
 		SELECT 
 			NVL(referer,'리퍼러없음') AS referer, 
 			COUNT(*) AS referer_count 
 		FROM tn_api_log 
 		WHERE 
-			api_key = #{value}
+			api_key = #{apiKey}
+		AND accept_time BETWEEN to_date(#{stDt}, 'YYYY-MM-DD') AND to_date(#{edDt}, 'YYYY-MM-DD') + 0.99999	
 		GROUP BY 
 			referer 
 		ORDER BY 

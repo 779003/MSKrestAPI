@@ -21,24 +21,24 @@ public class StatsDao {
 		return sqlsession.selectOne("stats.statsDetailMain", apiKey);
 	}
 	
-	public HashMap<String, String> statsToday(HashMap<String, String> statsParam){
-		return sqlsession.selectOne("stats.statsToday", statsParam);
+	public HashMap<String, String> statsToday(String apiKey){
+		return sqlsession.selectOne("stats.statsToday", apiKey);
 	}
 	
 	public List<HashMap<String, String>> statsCall(HashMap<String, String> statsParam){
 		return sqlsession.selectList("stats.statsCall", statsParam);
 	}
 	
-	public List<HashMap<String, String>> statsError(String apiKey){
-		return sqlsession.selectOne("stats.statsError", apiKey);
+	public List<HashMap<String, String>> statsError(HashMap<String, String> statsParam){
+		return sqlsession.selectList("stats.statsError", statsParam);
 	}
 	
-	public List<HashMap<String, String>> statsReferer(String apiKey){
-		return sqlsession.selectOne("stats.statsReferer", apiKey);
+	public List<HashMap<String, String>> statsReferer(HashMap<String, String> statsParam){
+		return sqlsession.selectList("stats.statsReferer", statsParam);
 	}
 	
 	public List<HashMap<String, String>> statsLogList(String apiKey){
-		return sqlsession.selectOne("stats.statsLogList", apiKey);
+		return sqlsession.selectList("stats.statsLogList", apiKey);
 	}
 	
 }

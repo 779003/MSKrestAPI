@@ -22,20 +22,20 @@ public class StatsService {
 		return statsDao.statsDetailMain(apiKey);
 	}
 	
-	public HashMap<String, String> statsToday(HashMap<String, String> statsParam){
-		return statsDao.statsToday(statsParam);
+	public HashMap<String, String> statsToday(String apiKey){
+		return statsDao.statsToday(apiKey);
 	}
 	
 	public List<HashMap<String, String>> statsCall(HashMap<String, String> statsParam){
 		return statsDao.statsCall(statsParam);
 	}
 	
-	public List<HashMap<String, String>> statsError(String apiKey){
-		return statsDao.statsError(apiKey);
+	public List<HashMap<String, String>> statsError(HashMap<String, String> statsParam){
+		return statsDao.statsError(statsParam);
 	}
 	
-	public List<HashMap<String, String>> statsReferer(String apiKey){
-		return statsDao.statsReferer(apiKey);
+	public List<HashMap<String, String>> statsReferer(HashMap<String, String> statsParam){
+		return statsDao.statsReferer(statsParam);
 	}
 	
 	public List<HashMap<String, String>> statsLogList(String apiKey){

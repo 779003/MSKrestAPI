@@ -104,7 +104,7 @@ var myPieChart = new Chart(ctx, {
     labels: error_code,
     datasets: [{
       data: error_code_count,
-      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745'],
+      backgroundColor: ['#007bff', '#dc3545', '#ffc107', '#28a745', '#FF00DD', '#FFBB00', '#00D8FF', '#CCA63D' ],
     }],
   },
 });

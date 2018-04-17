@@ -28,6 +28,7 @@
 				<ul class="sidenav-second-level collapse" id="howToUse">
 					<li><a href="/docs/key">키 발급</a></li>
 					<li><a href="/docs/api-use">API 호출</a></li>
+					<li><a href="/docs/stats">통계표 확인</a></li>
 				</ul></li>
 			<li class="nav-item" data-toggle="tooltip" data-placement="right"
 				title="국내 수족관 정보 API"><a

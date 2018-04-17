@@ -23,7 +23,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             HandlerMethod method = (HandlerMethod) handler;
             String methodName = method.getMethod().getName();
             String currUrl = "";
-            if(methodName.equals("appRegisterPage")) {
+            if(methodName.equals("statsMain") || methodName.equals("statsDetail") ) {
+            	currUrl= "/stats/main";
+            }else if(methodName.equals("appRegisterPage")) {
             	currUrl= "/apps/register";
             }else {
             	currUrl= "/apps";

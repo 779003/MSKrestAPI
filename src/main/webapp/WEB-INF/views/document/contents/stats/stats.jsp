@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    
 <link href="/bootstrap/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
     <div class="card mb-3">
@@ -17,30 +19,22 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>		
-                  <td>6234L4FXE9e4778h0I2R</td>
-                  <td><a href='/stats/6234L4FXE9e4778h0I2R'>피쉬닷컴 수족관찾기 서비스</a></td>
-                  <td>관상어 정보</td>
-                  <td>2018/04/11</td>
-                  <td>2018/04/11</td>
-                  <td>76</td>
-                </tr>
-                <tr>
-                  <td>Qk9Ym70puv8S0c965r3J</td>
-                  <td><a href='/stats/Qk9Ym70puv8S0c965r3J'>API 호출 테스트</a></td>
-                  <td>관상어 정보</td>
-                  <td>2018/04/11</td>
-                  <td>2018/04/11</td>
-                  <td>248</td>
-                </tr>
-                <tr>		
-                  <td>4465K58784Rs667vew59</td>
-                  <td><a href='/stats/4465K58784Rs667vew59'>app3</a></td>
-                  <td>수족관 정보</td>
-                  <td>2018/04/15</td>
-                  <td>2018/04/15</td>
-                  <td>0</td>
-                </tr>
+	              <c:forEach items="${appList}" var="app">
+	              	<tr>		
+	                  <td>${app.API_KEY}</td>
+	                  <td><a href='/stats/${app.API_KEY}'>${app.APP_NAME}</a></td>
+	                  <td>
+	                  	<c:choose>
+	                  		<c:when test="${'1' eq app.API_SEQ}">회원 관리</c:when>
+	                  		<c:when test="${'2' eq app.API_SEQ}">관상어 정보</c:when>
+	                  		<c:when test="${'3' eq app.API_SEQ}">수족관 정보</c:when>
+	                  	</c:choose> 
+	                  </td>
+	                  <td>${app.REG_DT}</td>
+	                  <td>${app.MOD_DT}</td>
+	                  <td>${app.CALL_COUNT_TOTAL}</td>
+	                </tr>
+	              </c:forEach>
               </tbody>
             </table>
           </div>
@@ -50,10 +44,10 @@
     <script src="/bootstrap/datatables/dataTables.bootstrap4.js"></script>
  	<script src="/js/sb-admin-datatables.js"></script>
   	<script>
-  	window.onload = function() {
+	$(document).ready(function(){
 	  	$("#dataTable_length").html("통계를 보고자 하는 애플리케이션을 선택해주세요.");
   		$("#dataTable_filter").hide();
   		$("#dataTable_info").hide();
   		$(".pagination").hide();
-  	};
+  	});
   	</script>

@@ -7,6 +7,7 @@ public enum DocsPageEnum {
 	MAIN(""),
 	CODE("code"),
 	KEY("key"),
+	STATS("stats"),
 	API_USE("api-use"),
 	AQUARIUMINFO("aquariumInfo"),
 	FISH_INFO("fishInfo");

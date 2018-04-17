@@ -27,6 +27,7 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/apps/**"/>
+			<mapping path="/stats/**"/>
 			<beans:bean id="LoginInterceptor" class="com.mskim.frontendService.usr.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>

@@ -53,6 +53,12 @@ public class DocumentController {
 			model.addAttribute("categoryLink", "/docs/api-use");
 			model.addAttribute("content", "document/manualApiUse.jsp");
 			break;			
+		case STATS:
+			model.addAttribute("category1", "OpenAPI 사용방법");
+			model.addAttribute("category2", "통계표 확인");
+			model.addAttribute("categoryLink", "/docs/stats");
+			model.addAttribute("content", "document/manualStats.jsp");
+			break;			
 		case AQUARIUMINFO:
 			model.addAttribute("category1", "국내 수족관 정보 API");
 			model.addAttribute("category2", "데이터 구조 및 예제");

@@ -15,7 +15,8 @@
   	<link href="/css/docContainer.css" rel="stylesheet">
   	<link href="/css/usr.css" rel="stylesheet">
   
-  	<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script>
+<!--   	<script src="https://code.jquery.com/jquery-3.3.1.min.js" ></script> -->
+  	<script src="/bootstrap/jquery/jquery.js" ></script>
 	<script src="/bootstrap/bootstrap/js/bootstrap.bundle.min.js"></script>
 	<script src="/bootstrap/jquery-easing/jquery.easing.min.js"></script>
 	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>

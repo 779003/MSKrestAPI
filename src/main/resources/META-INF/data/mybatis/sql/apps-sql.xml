@@ -185,4 +185,12 @@
         	api_key = #{api_key}
 	</update>
 	
+	<select id="getPermissionByApiKey" parameterType="String" resultType="int">
+		SELECT 
+			permission_level 
+		FROM 
+			tn_member 
+		WHERE 
+			id = (SELECT member_id FROM tn_apps WHERE api_key = #{apiKey})
+	</select>
 </mapper>

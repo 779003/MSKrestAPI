@@ -60,5 +60,9 @@ public class AppsService {
 	public int appUsrCheck(HashMap<String, String> usrInfo) {
 		return appsDao.appUsrCheck(usrInfo);
 	}
+
+	public int getPermissionByApiKey(String apiKey) {
+		return appsDao.getPermissionByApiKey(apiKey);
+	}
 	
 }

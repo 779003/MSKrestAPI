@@ -75,4 +75,8 @@ public class AppsDao{
 	public void callCount(String apiKey){
 		sqlsession.selectOne("apps.callCount", apiKey);
 	}
+	
+	public int getPermissionByApiKey(String apiKey){
+		return sqlsession.selectOne("apps.getPermissionByApiKey", apiKey);
+	}
 }

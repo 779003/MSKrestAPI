@@ -62,7 +62,7 @@ public class LogInterceptor  extends HandlerInterceptorAdapter  {
 		
 		if(request.getAttribute("logInfo") == null) {
 			
-			logger.info("log info is null");
+			logger.info("| log info is null");
 			
 		}else {
 			LogVo logInfo = (LogVo) request.getAttribute("logInfo");

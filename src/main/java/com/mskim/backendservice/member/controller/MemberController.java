@@ -158,16 +158,6 @@ public class MemberController{
 			return memberService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 		}
 
-		int notValidKeyCode = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return memberService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-		}
-
 		LogVo logInfo;
 		switch (requestVersion) {
 		
@@ -210,18 +200,7 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		int notValidKeyCode = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return memberService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-
-		}
-
+		
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -281,17 +260,7 @@ public class MemberController{
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return memberService.resultWithCode(memberVo, Code.BAD_REQUEST_3004);
 		}
-		
-		int notValidKeyCode = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return memberService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-		}
-
+				
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:

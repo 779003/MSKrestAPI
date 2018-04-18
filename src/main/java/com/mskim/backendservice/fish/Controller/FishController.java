@@ -104,17 +104,7 @@ public class FishController {
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 		}
-			
-		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-		}
-
+		
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -140,16 +130,6 @@ public class FishController {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-		}
-
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -193,17 +173,7 @@ public class FishController {
 			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
 			
 		}
-
-		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
-
-			int codeNumber = Math.abs(notValidKeyCode);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-		}
-
+		
 		if (!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
 
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");

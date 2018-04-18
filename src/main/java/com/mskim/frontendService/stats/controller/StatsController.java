@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.mskim.frontendService.stats.StatsService;
+import com.mskim.frontendService.stats.Service.StatsService;
 import com.mskim.frontendService.usr.service.LoginService;
 
 @Controller

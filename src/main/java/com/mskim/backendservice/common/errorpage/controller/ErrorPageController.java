@@ -1,5 +1,6 @@
 package com.mskim.backendservice.common.errorpage.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,31 @@ public class ErrorPageController{
 		return errorPageService.resultWithCode(Code.INTERNAL_SERVER_ERROR);		
 	}
 	
-	@RequestMapping(value="/9001", produces = "application/json; charset=utf8")
+	@RequestMapping(value="/1003", produces = "application/json; charset=utf8")
+	public String exceededCall(HttpServletResponse response){
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		return errorPageService.resultWithCode(Code.EXCEEDED_CALL);		
+	}
+	
+	@RequestMapping(value="/2001", produces = "application/json; charset=utf8")
+	public String invalidKey(HttpServletResponse response){
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		return errorPageService.resultWithCode(Code.INVALID_KEY);		
+	}
+	
+	@RequestMapping(value="/2002", produces = "application/json; charset=utf8")
+	public String noReferer(HttpServletResponse response){
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		return errorPageService.resultWithCode(Code.NO_REFERER);		
+	}
+	
+	@RequestMapping(value="/2003", produces = "application/json; charset=utf8")
+	public String notAllowed(HttpServletResponse response){
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		return errorPageService.resultWithCode(Code.NOT_ALLOWED);		
+	}
+	
+	@RequestMapping(value="/2004", produces = "application/json; charset=utf8")
 	public String badData(HttpServletResponse response){
 		response.setStatus(HttpStatus.BAD_REQUEST.value());
 		return errorPageService.resultWithCode(Code.BAD_DATA);		
@@ -67,6 +92,12 @@ public class ErrorPageController{
 	public String noApiKey(HttpServletResponse response){
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		return errorPageService.resultWithCode(Code.NO_APIKEY);		
+	}
+	
+	@RequestMapping(value="/3001", produces = "application/json; charset=utf8")
+	public String noVersion(HttpServletResponse response){
+		response.setStatus(HttpStatus.BAD_REQUEST.value());
+		return errorPageService.resultWithCode(Code.NO_VERSION);		
 	}
 	
 }

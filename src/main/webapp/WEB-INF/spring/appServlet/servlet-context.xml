@@ -39,6 +39,13 @@
 		</interceptor>
 	</interceptors>
 	
+	<interceptors>
+		<interceptor>
+			<mapping path="/api/**"/>
+			<beans:bean id="ApiInterceptor" class="com.mskim.backendservice.common.api.ApiInterceptor"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.mskim.backendservice" />
 	<context:component-scan base-package="com.mskim.frontendService" />
 	

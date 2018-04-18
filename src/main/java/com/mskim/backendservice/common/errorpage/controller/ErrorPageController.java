@@ -63,4 +63,10 @@ public class ErrorPageController{
 		return errorPageService.resultWithCode(Code.BAD_DATA);		
 	}
 	
+	@RequestMapping(value="/2005", produces = "application/json; charset=utf8")
+	public String noApiKey(HttpServletResponse response){
+		response.setStatus(HttpStatus.UNAUTHORIZED.value());
+		return errorPageService.resultWithCode(Code.NO_APIKEY);		
+	}
+	
 }

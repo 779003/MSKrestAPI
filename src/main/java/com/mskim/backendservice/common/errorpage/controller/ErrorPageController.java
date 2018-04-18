@@ -27,6 +27,12 @@ public class ErrorPageController{
 		return errorPageService.resultWithCode(Code.BAD_REQUEST);		
 	}
 	
+	@RequestMapping(value="/403", produces = "application/json; charset=utf8")
+	public String Forbidden(HttpServletResponse response){
+		response.setStatus(HttpStatus.FORBIDDEN.value());
+		return errorPageService.resultWithCode(Code.Forbidden);		
+	}
+	
 	@RequestMapping(value="/404", produces = "application/json; charset=utf8")
 	public String notPound(HttpServletResponse response){
 		response.setStatus(HttpStatus.NOT_FOUND.value());

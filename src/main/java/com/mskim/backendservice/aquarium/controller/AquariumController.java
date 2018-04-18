@@ -37,11 +37,6 @@ public class AquariumController {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return aquariumService.resultWithCode(Code.NO_APIKEY);
-		}
 		
 		if (requestVersion == null) {
 			
@@ -92,13 +87,6 @@ public class AquariumController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-					
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return aquariumService.resultWithCode(Code.NO_APIKEY);
-		
-		}
 		
 		if (requestVersion == null) {
 					
@@ -158,12 +146,6 @@ public class AquariumController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return aquariumService.resultWithCode(Code.NO_APIKEY);
-		}
 		
 		if (requestVersion == null) {
 					
@@ -219,13 +201,6 @@ public class AquariumController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return aquariumService.resultWithCode(Code.NO_APIKEY);
-		
-		}
 		
 		if (requestVersion == null) {
 					
@@ -280,12 +255,6 @@ public class AquariumController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return aquariumService.resultWithCode(Code.NO_APIKEY);		
-		}
 
 		if (requestVersion == null) {
 					

@@ -37,12 +37,6 @@ public class FishController {
         
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return fishService.resultWithCode(Code.NO_APIKEY);
-		}
-
 		if (requestVersion == null) {
 			
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
@@ -91,13 +85,6 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-					
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return fishService.resultWithCode(Code.NO_APIKEY);
-		
-		}
 		
 		if (requestVersion == null) {
 					
@@ -159,13 +146,6 @@ public class FishController {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return fishService.resultWithCode(Code.NO_APIKEY);
-		
-		}
-
 		if (requestVersion == null) {
 					
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
@@ -219,12 +199,6 @@ public class FishController {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return fishService.resultWithCode(Code.NO_APIKEY);
-		}
-
 		if (requestVersion == null) {
 					
 			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
@@ -276,12 +250,6 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return fishService.resultWithCode(Code.NO_APIKEY);
-		}
 
 		if (requestVersion == null) {
 					

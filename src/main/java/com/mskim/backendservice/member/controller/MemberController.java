@@ -58,12 +58,6 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
         
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return memberService.resultWithCode(Code.NO_APIKEY);
-		}
 		
 		if (requestVersion == null) {
 			
@@ -137,13 +131,6 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-					
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return memberService.resultWithCode(Code.NO_APIKEY);
-		
-		}
 
 		if (requestVersion == null) {
 					
@@ -211,13 +198,6 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return memberService.resultWithCode(Code.NO_APIKEY);
-		
-		}
 
 		if (requestVersion == null) {
 					
@@ -290,12 +270,6 @@ public class MemberController{
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return memberService.resultWithCode(Code.NO_APIKEY);
-		}
-
 		if (requestVersion == null) {
 					
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -358,12 +332,6 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		if(apikey == null){
-			
-			response.setStatus(HttpStatus.UNAUTHORIZED.value());
-			return memberService.resultWithCode(Code.NO_APIKEY);
-		}
 
 		if (requestVersion == null) {
 					

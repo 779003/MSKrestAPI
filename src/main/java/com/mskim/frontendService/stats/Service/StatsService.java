@@ -1,4 +1,4 @@
-package com.mskim.frontendService.stats;
+package com.mskim.frontendService.stats.Service;
 
 import java.util.HashMap;
 import java.util.List;

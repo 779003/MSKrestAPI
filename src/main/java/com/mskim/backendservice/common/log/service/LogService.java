@@ -34,5 +34,28 @@ public class LogService {
 		}
 
 	}
+	
+	public void insertLog(HttpServletRequest request, LogVo logVo, String requestUrl) {
+		
+		if (request.getHeader("referer") != null) {
+			logVo.setReferer(request.getHeader("referer"));
+		}
+		if (request.getRemoteHost() != null) {
+			logVo.setRemote_host(request.getRemoteHost());
+		}
+		if (requestUrl != null) {
+			logVo.setRequest_url(requestUrl);
+		}
+		
+		try {
+			
+			logDao.insertLog(logVo);
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+	}
 
 }

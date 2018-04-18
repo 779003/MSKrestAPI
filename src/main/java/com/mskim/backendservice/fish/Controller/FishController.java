@@ -36,31 +36,6 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response){
         
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
-		int remainingViews = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(remainingViews < 0){ //결과가 음수일 경우 코드값
-			
-			int codeNumber = Math.abs(remainingViews);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-			
-		}else if(remainingViews == 0){
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.EXCEEDED_CALL);
-		}
 		
 		LogVo logInfo;
 		switch (requestVersion) {
@@ -86,31 +61,6 @@ public class FishController {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		if (requestVersion == null) {
-					
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
-		int remainingViews = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(remainingViews < 0){ //결과가 음수일 경우 코드값
-			
-			int codeNumber = Math.abs(remainingViews);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return fishService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-			
-		}else if(remainingViews == 0){
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return fishService.resultWithCode(Code.EXCEEDED_CALL);
-			
-		}
-			
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -145,15 +95,6 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response) {
 		
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-					
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-			
-		}
 
 		String missingField = fishService.dataMissingCheck(fishVo);
 		if (!missingField.equals("")) {
@@ -198,15 +139,7 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-					
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-			
+		
 		int notValidKeyCode = fishService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
 		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
 
@@ -250,15 +183,7 @@ public class FishController {
 			HttpServletRequest request,	HttpServletResponse response) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-					
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
+		
 		String missingField = fishService.dataMissingCheck(fishVo);
 		if (!missingField.equals("")) {
 			

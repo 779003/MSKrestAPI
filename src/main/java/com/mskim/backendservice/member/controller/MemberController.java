@@ -59,31 +59,6 @@ public class MemberController{
         
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		if (requestVersion == null) {
-			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
-		int remainingViews = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(remainingViews < 0){ //결과가 음수일 경우 코드값
-			
-			int codeNumber = Math.abs(remainingViews);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return memberService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-			
-		}else if(remainingViews == 0){
-			
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(Code.EXCEEDED_CALL);
-		}
-		
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -132,31 +107,6 @@ public class MemberController{
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if (requestVersion == null) {
-					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
-		int remainingViews = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
-		if(remainingViews < 0){ //결과가 음수일 경우 코드값
-			
-			int codeNumber = Math.abs(remainingViews);
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.getCodeByCodeNumber(codeNumber).getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.FORBIDDEN.value());
-			return memberService.resultWithCode(Code.getCodeByCodeNumber(codeNumber));
-			
-		}else if(remainingViews == 0){
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.EXCEEDED_CALL.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(Code.EXCEEDED_CALL);
-			
-		}
-
 		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
@@ -198,16 +148,7 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
-			
-		}
-
+		
 		String missingField = memberService.dataMissingCheck(memberVo);
 		if (!missingField.equals("")) {
 			
@@ -270,15 +211,6 @@ public class MemberController{
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		if (requestVersion == null) {
-					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
-			
-		}
-
 		int notValidKeyCode = memberService.validityCheck(apikey, API_SEQ, request.getHeader("referer"));
 		if (notValidKeyCode < 0) { // 결과가 음수일 경우 코드값
 
@@ -332,15 +264,7 @@ public class MemberController{
 			@RequestHeader(value = "Apikey", required = false) String apikey) {
 
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		if (requestVersion == null) {
-					
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			return memberService.resultWithCode(parameterVo, Code.NO_VERSION);
-		}
-
+		
 		String missingField = memberService.dataMissingCheck(memberVo);
 		if (!missingField.equals("") || missingField.equals("member_id")) { // 수정시 id는 입력받지 않기 때문
 

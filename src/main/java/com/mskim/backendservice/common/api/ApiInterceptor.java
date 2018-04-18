@@ -72,32 +72,31 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 			}
 		}
 
+		if ("member".equals(apiName)) {
+			apiSeq = "1";
+			remainingViews = memberService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
+
+		} else if ("fish".equals(apiName)) {
+			apiSeq = "2";
+			remainingViews = fishService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
+
+		} else if ("aquariums".equals(apiName)) {
+			apiSeq = "3";
+			remainingViews = aquariumService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
+		}
+		
 		if (requestMethod.equals("GET")) {
-
-			if ("member".equals(apiName)) {
-				apiSeq = "1";
-				remainingViews = memberService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
-
-			} else if ("fish".equals(apiName)) {
-				apiSeq = "2";
-				remainingViews = fishService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
-
-			} else if ("aquariums".equals(apiName)) {
-				apiSeq = "3";
-				remainingViews = aquariumService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
-			}
-
-			if (remainingViews < 0) { // 결과가 음수일 경우 코드값
-				int codeNumber = Math.abs(remainingViews);
-				response.sendRedirect("/error/" + codeNumber + "?api=" + apiSeq + "&url=" + request.getRequestURI());
-				return false;
-
-			} else if (remainingViews == 0) {
+			if (remainingViews == 0) {
 				response.sendRedirect("/error/1003?api=" + apiSeq + "&url=" + request.getRequestURI());
 				return false;
 			}
 		}
 		
+		if (remainingViews < 0) { // 결과가 음수일 경우 코드값
+			int codeNumber = Math.abs(remainingViews);
+			response.sendRedirect("/error/" + codeNumber + "?api=" + apiSeq + "&url=" + request.getRequestURI());
+			return false;
+		}
 		
 		return true;
 	}

@@ -72,8 +72,8 @@
 	<!-- Exception -->
 	<error-page>
 		<exception-type>org.mybatis.spring.MyBatisSystemException</exception-type>
-		<location>/error/9001</location>
-	</error-page>
+		<location>/error/2004</location>
+	</error-page> 
 	<!-- HTTP status -->
 	<error-page>
 		<error-code>400</error-code>
@@ -94,6 +94,6 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/error/500</location>
-	</error-page>
+	</error-page> 
 
 </web-app>

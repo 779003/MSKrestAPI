@@ -77,8 +77,12 @@ public class AquariumService implements ApiServiceInterface {
 		HashMap<String, String> requestInfo = new HashMap<String, String>();
 		requestInfo.put("apiKey", apiKey);
 		requestInfo.put("apiSeq", apiSeq);
-		
+		boolean unknownKey = appsDao.apiKeyCount(apiKey) <= 0 ? true : false;			
 		boolean notValidKey = appsDao.thisKeyCorrect(requestInfo) <= 0 ? true : false;		
+		
+		if(unknownKey) {
+			return -2006;
+		}
 		
 		if (notValidKey) {
 			return -2001;

@@ -56,18 +56,21 @@ public class ErrorPageInterceptor extends HandlerInterceptorAdapter{
 		if (errorCode != null) {
 			logger.info("| Error code : " + errorCode);
 		}
-
+		
 		if (request.getRemoteHost() != null) {
+			
 			logger.info("| getRemoteHost : " + request.getRemoteHost());
 		}
 
+		logger.info("| requestUrl : " + requestUrl);
+		
 		logInfo = new LogVo(apiKey, apiSeq, "FAILURE", errorCode, "RETURN_ERROR");
 		String useInfo = "| API KEY : " + logInfo.getApi_key();
 		useInfo += ", Success? : " + logInfo.getSuccess();
 		useInfo += ", Error Code : " + logInfo.getError_code();
 
 		logger.info(useInfo);
-
+		
 		try {
 			logService.insertLog(request, logInfo, requestUrl);
 		} catch (Exception e) {

@@ -35,7 +35,14 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		
+		/*
+		 * API 호출 이전 유효성 검사
+		 * 
+		 * 1. API Key null 체크
+		 * 2. 버전 정보 null 체크
+		 * 3. 유저 및 API Key 유효성 체크, 허용URL체크
+		 * 4. 유저 권한 체크
+		 * */
 		Map<?, ?> pathVariable = (Map<?, ?>) request.getAttribute(HandlerMapping.URI_TEMPLATE_VARIABLES_ATTRIBUTE);
 		String[] urlSplit = request.getRequestURI().split("/");
 		HandlerMethod method = (HandlerMethod) handler;	
@@ -45,33 +52,21 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		String apiName = urlSplit[3];
 		String apiSeq = "0";
 		int remainingViews = 0;
+		String requestMethod = request.getMethod();
 		
-		
+		/* 1. API Key null 체크 */
 		if(apiKey == null){
 			response.sendRedirect("/error/2005?api="+apiSeq);
 			return false;
-		}
+		}		
 		
+		/* 2. 버전 정보 null 체크 */
 		if (requestVersion == null) {
 			response.sendRedirect("/error/3001?api=" + apiSeq + "&url=" + request.getRequestURI());
 			return false;
 		}
 		
-		int userType = appsService.getPermissionByApiKey(apiKey);
-		String requestMethod = request.getMethod();
-		
-		if (userType == USER) {
-			
-			if(! requestMethod.equals("GET")) {
-				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
-				return false;
-			}			
-			if( requestMethod.equals("GET") && (methodName.equals("selectMembers") || methodName.equals("selectMember"))) {
-				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
-				return false;
-			}
-		}
-
+		/* 3. 유저 및 API Key 유효성 체크, 허용URL체크 */
 		if ("member".equals(apiName)) {
 			apiSeq = "1";
 			remainingViews = memberService.validityCheck(apiKey, apiSeq, request.getHeader("referer"));
@@ -96,6 +91,20 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 			int codeNumber = Math.abs(remainingViews);
 			response.sendRedirect("/error/" + codeNumber + "?api=" + apiSeq + "&url=" + request.getRequestURI());
 			return false;
+		}
+		
+		/* 4. 유저 권한 체크 */
+		int userType = appsService.getPermissionByApiKey(apiKey);
+		if (userType == USER) {
+			
+			if(! requestMethod.equals("GET")) {
+				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
+				return false;
+			}			
+			if( requestMethod.equals("GET") && (methodName.equals("selectMembers") || methodName.equals("selectMember"))) {
+				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
+				return false;
+			}
 		}
 		
 		return true;

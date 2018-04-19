@@ -35,18 +35,18 @@ public class AquariumController {
 	public String selectAquariums(@RequestHeader(value = "Apikey", required = false) String apikey, AquariumVo parameterVo,
 								  HttpServletRequest request,	HttpServletResponse response) {
 
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
-			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			aquariumService.callCount(apikey);
 			return gson.toJson(aquariumService.selectAquariums());
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return aquariumService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -60,28 +60,28 @@ public class AquariumController {
 	public String selectAquarium(@RequestHeader(value = "Apikey", required = false) String apikey, AquariumVo parameterVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
 			if (aquariumService.alreadyHasValue(parameterVo.getAquarium_seq())) {
 
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				aquariumService.callCount(apikey);
 				return gson.toJson(aquariumService.selectAquarium(parameterVo.getAquarium_seq()));
 				
 			} else {
 				
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return aquariumService.resultWithCode(parameterVo, Code.NO_RESULT_WITH_VALUE);
 			}
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return aquariumService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -95,30 +95,31 @@ public class AquariumController {
 			AquariumVo parameterVo, @RequestBody AquariumVo aquariumVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
-		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
-		String missingField = aquariumService.dataMissingCheck(aquariumVo);
-		if (!missingField.equals("")) {
-
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return aquariumService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
-		}
-		
 		LogVo logInfo;
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
 		switch (requestVersion) {
 
 		case VERSION_1:
-			aquariumService.insertAquarium(aquariumVo);
-			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.CREATED.value());
-			return aquariumService.resultWithCode(aquariumVo, Code.INSERT);
+			
+			String missingField = aquariumService.dataMissingCheck(aquariumVo);
+			if (!missingField.equals("")) {
 
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return aquariumService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+				
+			}else {
+				
+				aquariumService.insertAquarium(aquariumVo);
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.CREATED.value());
+				return aquariumService.resultWithCode(aquariumVo, Code.INSERT);
+			}
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return aquariumService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -132,27 +133,27 @@ public class AquariumController {
 	public String deleteAquarium(@RequestHeader(value = "Apikey", required = false) String apikey, AquariumVo parameterVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
 			if (aquariumService.alreadyHasValue(parameterVo.getAquarium_seq())) {
 
 				aquariumService.deleteAquarium(parameterVo.getAquarium_seq());
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				return aquariumService.resultWithCode(parameterVo, Code.DELETE);
 
 			} else {
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return aquariumService.resultWithCode(parameterVo, Code.NO_VALUE_DELETE);
 			}
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return aquariumService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -167,39 +168,39 @@ public class AquariumController {
 			AquariumVo parameterVo, @RequestBody AquariumVo aquariumVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 
-		String missingField = aquariumService.dataMissingCheck(aquariumVo);
-		if (!missingField.equals("")) {
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return aquariumService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
-		}
-		
-		if (!parameterVo.getAquarium_seq().equals(aquariumVo.getAquarium_seq())) {
-
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return aquariumService.resultWithCode(aquariumVo, Code.BAD_REQUEST_3004);
-		}
-
-		LogVo logInfo;
 		switch (requestVersion) {
-
 		case VERSION_1:
+			
+			String missingField = aquariumService.dataMissingCheck(aquariumVo);
+			if (!missingField.equals("")) {
+				
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);			
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return aquariumService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+			}
+			
+			if (!parameterVo.getAquarium_seq().equals(aquariumVo.getAquarium_seq())) {
+
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return aquariumService.resultWithCode(aquariumVo, Code.BAD_REQUEST_3004);
+			}
+			
 			if (aquariumService.alreadyHasValue(aquariumVo.getAquarium_seq())) {
 
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				aquariumService.updateAquarium(aquariumVo);
 				return aquariumService.resultWithCode(aquariumVo, Code.UPDATE);
 
 			} else {
 
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return aquariumService.resultWithCode(aquariumVo, Code.NO_VALUE_UPDATE);
@@ -207,7 +208,7 @@ public class AquariumController {
 
 		default:
 
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return aquariumService.resultWithCode(parameterVo, Code.NO_VERSION);

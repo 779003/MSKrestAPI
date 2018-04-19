@@ -35,18 +35,18 @@ public class FishController {
 	public String selectAllFish(@RequestHeader(value = "Apikey", required = false) String apikey, FishVo parameterVo,
 			HttpServletRequest request,	HttpServletResponse response){
         
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
-			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			fishService.callCount(apikey);
 			return gson.toJson(fishService.selectAllFish());
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.BAD_REQUEST.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -59,28 +59,28 @@ public class FishController {
 	public String selectFish(@RequestHeader(value = "Apikey", required = false) String apikey, FishVo parameterVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
-		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-		
 		LogVo logInfo;
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
+
 		switch (requestVersion) {
 		case VERSION_1:
 			if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
 
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				fishService.callCount(apikey);
 				return gson.toJson(fishService.selectFish(parameterVo.getFish_seq()));
 
 			} else {
 
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_RESULT.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return fishService.resultWithCode(parameterVo, Code.NO_RESULT_WITH_VALUE);
 			}
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -94,28 +94,30 @@ public class FishController {
 			FishVo parameterVo, @RequestBody FishVo fishVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 		
-		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
-
-		String missingField = fishService.dataMissingCheck(fishVo);
-		if (!missingField.equals("")) {
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);			
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
-		}
-		
 		LogVo logInfo;
+		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
+		
 		switch (requestVersion) {
 		case VERSION_1:
-			logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			fishService.insertFish(fishVo);
-			response.setStatus(HttpStatus.CREATED.value());
-			return fishService.resultWithCode(fishVo, Code.INSERT);
+			
+			String missingField = fishService.dataMissingCheck(fishVo);
+			if (!missingField.equals("")) {
+				
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);			
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+			}else {
+				
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				fishService.insertFish(fishVo);
+				response.setStatus(HttpStatus.CREATED.value());
+				return fishService.resultWithCode(fishVo, Code.INSERT);
+			}
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -128,27 +130,27 @@ public class FishController {
 	public String deleteFish(@RequestHeader(value = "Apikey", required = false) String apikey, FishVo parameterVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		LogVo logInfo;
 		switch (requestVersion) {
 		case VERSION_1:
 			if (fishService.alreadyHasValue(parameterVo.getFish_seq())) {
 
 				fishService.deleteFish(parameterVo.getFish_seq());
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				return fishService.resultWithCode(parameterVo, Code.DELETE);
 
 			}else{
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_DELETE.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return fishService.resultWithCode(parameterVo, Code.NO_VALUE_DELETE);
 			}
 
 		default:
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);
@@ -162,40 +164,40 @@ public class FishController {
 			FishVo parameterVo, @RequestBody FishVo fishVo,
 			HttpServletRequest request,	HttpServletResponse response) {
 
+		LogVo logInfo;
 		Version requestVersion = Version.getVersionByString(parameterVo.getVersion());
 		
-		String missingField = fishService.dataMissingCheck(fishVo);
-		if (!missingField.equals("")) {
-			
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
-			
-		}
-		
-		if (!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
-
-			LogVo logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "API_USE");
-			request.setAttribute("logInfo", logInfo);
-			response.setStatus(HttpStatus.BAD_REQUEST.value());
-			return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_3004);
-		}
-
-		LogVo logInfo;
 		switch (requestVersion) {
 
 		case VERSION_1:
+			
+			String missingField = fishService.dataMissingCheck(fishVo);
+			if (!missingField.equals("")) {
+				
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3006.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return fishService.resultWithCode(missingField, Code.BAD_REQUEST_3005);
+			
+			}else if(!parameterVo.getFish_seq().equals(fishVo.getFish_seq())) {
+
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.BAD_REQUEST_3004.getCode(), "CALLED_API");
+				request.setAttribute("logInfo", logInfo);
+				response.setStatus(HttpStatus.BAD_REQUEST.value());
+				return fishService.resultWithCode(fishVo, Code.BAD_REQUEST_3004);
+
+			}
+			
 			if (fishService.alreadyHasValue(fishVo.getFish_seq())) {
 
-				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "SUCCESS", null, "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				fishService.updateFish(fishVo);
 				return fishService.resultWithCode(fishVo, Code.UPDATE);
 
-			}else{
+			} else {
 
-				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "API_USE");
+				logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VALUE_UPDATE.getCode(), "CALLED_API");
 				request.setAttribute("logInfo", logInfo);
 				response.setStatus(HttpStatus.BAD_REQUEST.value());
 				return fishService.resultWithCode(fishVo, Code.NO_VALUE_UPDATE);
@@ -203,7 +205,7 @@ public class FishController {
 
 		default:
 
-			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "API_USE");
+			logInfo = new LogVo(apikey, API_SEQ, "FAILURE", Code.NO_VERSION.getCode(), "CALLED_API");
 			request.setAttribute("logInfo", logInfo);
 			response.setStatus(HttpStatus.NOT_FOUND.value());
 			return fishService.resultWithCode(parameterVo, Code.NO_VERSION);

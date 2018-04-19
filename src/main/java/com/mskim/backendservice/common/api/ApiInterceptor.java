@@ -53,6 +53,7 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		String apiSeq = "0";
 		int remainingViews = 0;
 		String requestMethod = request.getMethod();
+		String requestURL = request.getMethod() + "(" + request.getMethod() + ")";
 		
 		/* 1. API Key null 체크 */
 		if(apiKey == null){
@@ -62,7 +63,7 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		
 		/* 2. 버전 정보 null 체크 */
 		if (requestVersion == null) {
-			response.sendRedirect("/error/3001?api=" + apiSeq + "&url=" + request.getRequestURI());
+			response.sendRedirect("/error/3001?api=" + apiSeq + "&url=" + requestURL);
 			return false;
 		}
 		
@@ -82,14 +83,14 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		
 		if (requestMethod.equals("GET")) {
 			if (remainingViews == 0) {
-				response.sendRedirect("/error/1003?api=" + apiSeq + "&url=" + request.getRequestURI());
+				response.sendRedirect("/error/1003?api=" + apiSeq + "&url=" + requestURL);
 				return false;
 			}
 		}
 		
 		if (remainingViews < 0) { // 결과가 음수일 경우 코드값
 			int codeNumber = Math.abs(remainingViews);
-			response.sendRedirect("/error/" + codeNumber + "?api=" + apiSeq + "&url=" + request.getRequestURI());
+			response.sendRedirect("/error/" + codeNumber + "?api=" + apiSeq + "&url=" + requestURL);
 			return false;
 		}
 		
@@ -98,11 +99,11 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		if (userType == USER) {
 			
 			if(! requestMethod.equals("GET")) {
-				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
+				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + requestURL);
 				return false;
 			}			
 			if( requestMethod.equals("GET") && (methodName.equals("selectMembers") || methodName.equals("selectMember"))) {
-				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + request.getRequestURI());
+				response.sendRedirect("/error/403?api="+apiSeq + "&url=" + requestURL);
 				return false;
 			}
 		}

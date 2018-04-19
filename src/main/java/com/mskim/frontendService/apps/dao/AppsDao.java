@@ -60,6 +60,10 @@ public class AppsDao{
 		return sqlsession.selectOne("apps.appUsrCheck", usrInfo);
 	}
 	
+	public int apiKeyCount(String apiKey){
+		return sqlsession.selectOne("apps.apiKeyCount", apiKey);
+	}
+	
 	public int thisKeyCorrect(HashMap<String, String> requestInfo){
 		return sqlsession.selectOne("apps.thisKeyCorrect", requestInfo);
 	}

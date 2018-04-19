@@ -146,6 +146,15 @@
 			
 	</select>	 
 	
+	<select id="apiKeyCount" parameterType="String" resultType="int">
+		SELECT 			
+			COUNT(*)
+		FROM 
+			tn_apps
+		WHERE 
+			api_key = #{apiKey}
+	</select>	
+	
 	<select id="thisKeyCorrect" parameterType="hashmap" resultType="int">
 		SELECT 			
 			COUNT(*)

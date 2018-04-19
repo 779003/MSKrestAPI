@@ -1,6 +1,5 @@
 package com.mskim.backendservice.common.errorpage.controller;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,7 @@ public class ErrorPageController{
 	@RequestMapping(value="/403", produces = "application/json; charset=utf8")
 	public String Forbidden(HttpServletResponse response){
 		response.setStatus(HttpStatus.FORBIDDEN.value());
-		return errorPageService.resultWithCode(Code.Forbidden);		
+		return errorPageService.resultWithCode(Code.FORBIDDEN);		
 	}
 	
 	@RequestMapping(value="/404", produces = "application/json; charset=utf8")
@@ -92,6 +91,12 @@ public class ErrorPageController{
 	public String noApiKey(HttpServletResponse response){
 		response.setStatus(HttpStatus.UNAUTHORIZED.value());
 		return errorPageService.resultWithCode(Code.NO_APIKEY);		
+	}
+	
+	@RequestMapping(value="/2006", produces = "application/json; charset=utf8")
+	public String unknownKey(HttpServletResponse response){
+		response.setStatus(HttpStatus.UNAUTHORIZED.value());
+		return errorPageService.resultWithCode(Code.UNKNOWN_KEY);		
 	}
 	
 	@RequestMapping(value="/3001", produces = "application/json; charset=utf8")

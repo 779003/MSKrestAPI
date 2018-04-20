@@ -4,11 +4,11 @@
 <h2>관상어 정보 api 구조</h2>
 <div align="center">
 <table cellspacing="0" border="0">
-	<colgroup width="165"></colgroup>
-	<colgroup width="126"></colgroup>
-	<colgroup width="134"></colgroup>
-	<colgroup width="104"></colgroup>
-	<colgroup span="3" width="166"></colgroup>
+	<colgroup style="max-width:165"></colgroup>
+	<colgroup style="max-width:126"></colgroup>
+	<colgroup style="max-width:134"></colgroup>
+	<colgroup style="max-width:104"></colgroup>
+	<colgroup span="3" style="max-width:166"></colgroup>
 	<tr>
 		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle bgcolor="#C6D9F1"><b><font face="DejaVu Sans" color="#000000">API 명</font></b></td>
 		<td style="border-top: 2px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" colspan=2 align="left" valign=middle><font face="DejaVu Sans" color="#000000">관상어 정보</font></td>

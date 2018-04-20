@@ -31,7 +31,7 @@ API를 호출하는데 필요한 내용만 확인하시고&nbsp;</div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-95czP14FOaU/Ws7vYuUOmoI/AAAAAAAAALY/kJ_ETOJ0iUsJIfjaGogkIHKkBxtXhqYrQCLcBGAs/s1600/fish1%2Bpost.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="668" data-original-width="698" height="612" src="https://2.bp.blogspot.com/-95czP14FOaU/Ws7vYuUOmoI/AAAAAAAAALY/kJ_ETOJ0iUsJIfjaGogkIHKkBxtXhqYrQCLcBGAs/s640/fish1%2Bpost.jpg" width="640" /></a></div>
+<a href="https://2.bp.blogspot.com/-95czP14FOaU/Ws7vYuUOmoI/AAAAAAAAALY/kJ_ETOJ0iUsJIfjaGogkIHKkBxtXhqYrQCLcBGAs/s1600/fish1%2Bpost.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="668" data-original-width="698" height="612" src="https://2.bp.blogspot.com/-95czP14FOaU/Ws7vYuUOmoI/AAAAAAAAALY/kJ_ETOJ0iUsJIfjaGogkIHKkBxtXhqYrQCLcBGAs/s640/fish1%2Bpost.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: left;">
@@ -54,7 +54,7 @@ API를 호출하는데 필요한 내용만 확인하시고&nbsp;</div>
 <b>2. 모든 관상어 정보 조회</b></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-Y6gvdY16ffY/Ws7vYzsR33I/AAAAAAAAALc/yNUOLE7fp6g1liGKAB9FWLyuHZDpWQVTQCLcBGAs/s1600/fish2%2Bget.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="720" data-original-width="711" height="640" src="https://2.bp.blogspot.com/-Y6gvdY16ffY/Ws7vYzsR33I/AAAAAAAAALc/yNUOLE7fp6g1liGKAB9FWLyuHZDpWQVTQCLcBGAs/s640/fish2%2Bget.jpg" width="632" /></a></div>
+<a href="https://2.bp.blogspot.com/-Y6gvdY16ffY/Ws7vYzsR33I/AAAAAAAAALc/yNUOLE7fp6g1liGKAB9FWLyuHZDpWQVTQCLcBGAs/s1600/fish2%2Bget.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="720" data-original-width="711" height="640" src="https://2.bp.blogspot.com/-Y6gvdY16ffY/Ws7vYzsR33I/AAAAAAAAALc/yNUOLE7fp6g1liGKAB9FWLyuHZDpWQVTQCLcBGAs/s640/fish2%2Bget.jpg" width="90%" style="max-width: 632" /></a></div>
 <div class="separator" style="clear: both;">
 <b>1.</b>&nbsp;호출 URL (/api/{버전}/fish)을 GET으로 전송합니다.</div>
 <div class="separator" style="clear: both;">
@@ -73,7 +73,7 @@ API를 호출하는데 필요한 내용만 확인하시고&nbsp;</div>
 <b>3. 단일 관상어 조회</b></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-tfrF7_Q6ECU/Ws7vYkWCeyI/AAAAAAAAALU/dfOZVyz3p3oYWWoqRATitTXGZ_vLk9ShACLcBGAs/s1600/fish3%2Bget.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="420" data-original-width="711" height="378" src="https://2.bp.blogspot.com/-tfrF7_Q6ECU/Ws7vYkWCeyI/AAAAAAAAALU/dfOZVyz3p3oYWWoqRATitTXGZ_vLk9ShACLcBGAs/s640/fish3%2Bget.jpg" width="640" /></a></div>
+<a href="https://2.bp.blogspot.com/-tfrF7_Q6ECU/Ws7vYkWCeyI/AAAAAAAAALU/dfOZVyz3p3oYWWoqRATitTXGZ_vLk9ShACLcBGAs/s1600/fish3%2Bget.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="420" data-original-width="711" height="378" src="https://2.bp.blogspot.com/-tfrF7_Q6ECU/Ws7vYkWCeyI/AAAAAAAAALU/dfOZVyz3p3oYWWoqRATitTXGZ_vLk9ShACLcBGAs/s640/fish3%2Bget.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both;">
 <b>1.</b>&nbsp;호출 URL (/api/{버전}/fish/{물고기 일련번호})을 GET으로 전송합니다.</div>
 <div class="separator" style="clear: both;">
@@ -91,7 +91,7 @@ API를 호출하는데 필요한 내용만 확인하시고&nbsp;</div>
 <div class="separator" style="clear: both;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://3.bp.blogspot.com/-OfOvqriK3vc/Ws7vZVdWIRI/AAAAAAAAALg/dFMmK8EfrvoUls0tA1WrLWGMHe5DlV7UwCLcBGAs/s1600/fish4%2Bput.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="682" data-original-width="711" height="612" src="https://3.bp.blogspot.com/-OfOvqriK3vc/Ws7vZVdWIRI/AAAAAAAAALg/dFMmK8EfrvoUls0tA1WrLWGMHe5DlV7UwCLcBGAs/s640/fish4%2Bput.jpg" width="640" /></a></div>
+<a href="https://3.bp.blogspot.com/-OfOvqriK3vc/Ws7vZVdWIRI/AAAAAAAAALg/dFMmK8EfrvoUls0tA1WrLWGMHe5DlV7UwCLcBGAs/s1600/fish4%2Bput.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="682" data-original-width="711" height="612" src="https://3.bp.blogspot.com/-OfOvqriK3vc/Ws7vZVdWIRI/AAAAAAAAALg/dFMmK8EfrvoUls0tA1WrLWGMHe5DlV7UwCLcBGAs/s640/fish4%2Bput.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both;">
 <b>1.</b>&nbsp;호출 URL (/api/{버전}/fish{수정할 관상어 일련번호})을 PUT으로 전송합니다.</div>
 <div class="separator" style="clear: both;">
@@ -113,7 +113,7 @@ API를 호출하는데 필요한 내용만 확인하시고&nbsp;</div>
 <div style="text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://1.bp.blogspot.com/-E-5gUPZCmfs/Ws7vZjgl1sI/AAAAAAAAALk/pNezqA1EOyg7pJv8I6VH-rwG44lMhCp5QCLcBGAs/s1600/fish5%2Bdelete.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="468" data-original-width="711" height="420" src="https://1.bp.blogspot.com/-E-5gUPZCmfs/Ws7vZjgl1sI/AAAAAAAAALk/pNezqA1EOyg7pJv8I6VH-rwG44lMhCp5QCLcBGAs/s640/fish5%2Bdelete.jpg" width="640" /></a></div>
+<a href="https://1.bp.blogspot.com/-E-5gUPZCmfs/Ws7vZjgl1sI/AAAAAAAAALk/pNezqA1EOyg7pJv8I6VH-rwG44lMhCp5QCLcBGAs/s1600/fish5%2Bdelete.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="468" data-original-width="711" height="420" src="https://1.bp.blogspot.com/-E-5gUPZCmfs/Ws7vZjgl1sI/AAAAAAAAALk/pNezqA1EOyg7pJv8I6VH-rwG44lMhCp5QCLcBGAs/s640/fish5%2Bdelete.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both;">
 <b>1.</b>&nbsp;호출 URL (/api/{버전}/fish/{관상어 일련번호})을 DELETE로 전송합니다.</div>
 <div class="separator" style="clear: both;">

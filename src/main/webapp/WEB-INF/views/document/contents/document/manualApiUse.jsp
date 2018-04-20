@@ -20,7 +20,7 @@
 			border="0" data-original-height="704" data-original-width="1581"
 			height="284"
 			src="https://3.bp.blogspot.com/-8rhuXA_GYaU/Ws6rDR9t8bI/AAAAAAAAAK4/CY9Ml0gssoYcr0xA02xIUUZ2sFOcALG7wCLcBGAs/s640/guide_useApi1.jpg"
-			width="640" /></a>
+			width="90%" style="max-width: 640" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		<br />
@@ -90,7 +90,7 @@
 			border="0" data-original-height="454" data-original-width="965"
 			height="300"
 			src="https://1.bp.blogspot.com/-UnlRtI5cOZg/Ws6rBBm4qpI/AAAAAAAAAKk/5KHqbXjcC98rHcgRYYvuCYAxZ6C29ox8QCLcBGAs/s640/K-009.jpg"
-			width="640" /></a>
+			width="90%" style="max-width: 640" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		위는 오픈API 호출 예제입니다.</div>
@@ -119,7 +119,7 @@
 			border="0" data-original-height="1031" data-original-width="531"
 			height="320"
 			src="https://3.bp.blogspot.com/-seWtjiCv4cs/Ws9KCXtDDfI/AAAAAAAAAMU/YasU9gTkjO8Y01y9jZ8mGFo-GqQhQLoCwCLcBGAs/s400/KakaoTalk_20180412_205137021.jpg"
-			width="164" /></a>
+			width="90%" style="max-width: 164" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		<br />

@@ -10,7 +10,7 @@
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-7uLxDpANoAw/WtWL8kDCm7I/AAAAAAAAAMk/8dwqVFGwuR0HVcp1IdraelQxzkAfncGmgCLcBGAs/s1600/K-001.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="244" data-original-width="429" height="364" src="https://2.bp.blogspot.com/-7uLxDpANoAw/WtWL8kDCm7I/AAAAAAAAAMk/8dwqVFGwuR0HVcp1IdraelQxzkAfncGmgCLcBGAs/s640/K-001.jpg" width="640" /></a></div>
+<a href="https://2.bp.blogspot.com/-7uLxDpANoAw/WtWL8kDCm7I/AAAAAAAAAMk/8dwqVFGwuR0HVcp1IdraelQxzkAfncGmgCLcBGAs/s1600/K-001.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="244" data-original-width="429" height="364" src="https://2.bp.blogspot.com/-7uLxDpANoAw/WtWL8kDCm7I/AAAAAAAAAMk/8dwqVFGwuR0HVcp1IdraelQxzkAfncGmgCLcBGAs/s640/K-001.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -19,7 +19,7 @@
 <br /></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://4.bp.blogspot.com/-9LQV2vaJFPY/WtWL8vVE5WI/AAAAAAAAAMo/gRIY4Xk4o8YPOujFJA7lhdnE9OV635lcgCLcBGAs/s1600/K-002.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="354" data-original-width="1162" height="194" src="https://4.bp.blogspot.com/-9LQV2vaJFPY/WtWL8vVE5WI/AAAAAAAAAMo/gRIY4Xk4o8YPOujFJA7lhdnE9OV635lcgCLcBGAs/s640/K-002.jpg" width="640" /></a></div>
+<a href="https://4.bp.blogspot.com/-9LQV2vaJFPY/WtWL8vVE5WI/AAAAAAAAAMo/gRIY4Xk4o8YPOujFJA7lhdnE9OV635lcgCLcBGAs/s1600/K-002.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="354" data-original-width="1162" height="194" src="https://4.bp.blogspot.com/-9LQV2vaJFPY/WtWL8vVE5WI/AAAAAAAAAMo/gRIY4Xk4o8YPOujFJA7lhdnE9OV635lcgCLcBGAs/s640/K-002.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -31,7 +31,7 @@
 <br />
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://3.bp.blogspot.com/-MzflWv8Y4YU/WtWL8qptpHI/AAAAAAAAAMs/vh63esJioAUVcuX0mDDAeFvWIsf4Wh5TwCLcBGAs/s1600/K-003.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="355" data-original-width="950" height="238" src="https://3.bp.blogspot.com/-MzflWv8Y4YU/WtWL8qptpHI/AAAAAAAAAMs/vh63esJioAUVcuX0mDDAeFvWIsf4Wh5TwCLcBGAs/s640/K-003.jpg" width="640" /></a></div>
+<a href="https://3.bp.blogspot.com/-MzflWv8Y4YU/WtWL8qptpHI/AAAAAAAAAMs/vh63esJioAUVcuX0mDDAeFvWIsf4Wh5TwCLcBGAs/s1600/K-003.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="355" data-original-width="950" height="238" src="https://3.bp.blogspot.com/-MzflWv8Y4YU/WtWL8qptpHI/AAAAAAAAAMs/vh63esJioAUVcuX0mDDAeFvWIsf4Wh5TwCLcBGAs/s640/K-003.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -42,7 +42,7 @@
 <br /></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://4.bp.blogspot.com/-WgAeo6M1Fk0/WtWL9lcPUmI/AAAAAAAAAMw/YGo-AmkpG9IjNudq92TL9N22693ja6PngCLcBGAs/s1600/K-004.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="417" data-original-width="950" height="280" src="https://4.bp.blogspot.com/-WgAeo6M1Fk0/WtWL9lcPUmI/AAAAAAAAAMw/YGo-AmkpG9IjNudq92TL9N22693ja6PngCLcBGAs/s640/K-004.jpg" width="640" /></a></div>
+<a href="https://4.bp.blogspot.com/-WgAeo6M1Fk0/WtWL9lcPUmI/AAAAAAAAAMw/YGo-AmkpG9IjNudq92TL9N22693ja6PngCLcBGAs/s1600/K-004.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="417" data-original-width="950" height="280" src="https://4.bp.blogspot.com/-WgAeo6M1Fk0/WtWL9lcPUmI/AAAAAAAAAMw/YGo-AmkpG9IjNudq92TL9N22693ja6PngCLcBGAs/s640/K-004.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -53,7 +53,7 @@
 <br />
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://1.bp.blogspot.com/-jtBhmH-fG88/WtWL918K6RI/AAAAAAAAAM0/8150F3YAvfkZTg2LtEhbqKMXZf2Lv_QoQCLcBGAs/s1600/K-005.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="409" data-original-width="950" height="274" src="https://1.bp.blogspot.com/-jtBhmH-fG88/WtWL918K6RI/AAAAAAAAAM0/8150F3YAvfkZTg2LtEhbqKMXZf2Lv_QoQCLcBGAs/s640/K-005.jpg" width="640" /></a></div>
+<a href="https://1.bp.blogspot.com/-jtBhmH-fG88/WtWL918K6RI/AAAAAAAAAM0/8150F3YAvfkZTg2LtEhbqKMXZf2Lv_QoQCLcBGAs/s1600/K-005.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="409" data-original-width="950" height="274" src="https://1.bp.blogspot.com/-jtBhmH-fG88/WtWL918K6RI/AAAAAAAAAM0/8150F3YAvfkZTg2LtEhbqKMXZf2Lv_QoQCLcBGAs/s640/K-005.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -70,7 +70,7 @@
 <br /></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-qFpWHIDZ3gQ/WtWL93Fu9pI/AAAAAAAAAM4/Qs5WVBoUib4VfREDusezXWJ3x3Q1rwh3gCLcBGAs/s1600/K-006.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="389" data-original-width="627" height="396" src="https://2.bp.blogspot.com/-qFpWHIDZ3gQ/WtWL93Fu9pI/AAAAAAAAAM4/Qs5WVBoUib4VfREDusezXWJ3x3Q1rwh3gCLcBGAs/s640/K-006.jpg" width="640" /></a></div>
+<a href="https://2.bp.blogspot.com/-qFpWHIDZ3gQ/WtWL93Fu9pI/AAAAAAAAAM4/Qs5WVBoUib4VfREDusezXWJ3x3Q1rwh3gCLcBGAs/s1600/K-006.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="389" data-original-width="627" height="396" src="https://2.bp.blogspot.com/-qFpWHIDZ3gQ/WtWL93Fu9pI/AAAAAAAAAM4/Qs5WVBoUib4VfREDusezXWJ3x3Q1rwh3gCLcBGAs/s640/K-006.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -85,7 +85,7 @@
 <br /></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://1.bp.blogspot.com/-Azl5XtK8rpc/WtWL-pHmG1I/AAAAAAAAAM8/RCWOQlFd3iMPCTG1_Pz5VJUW_HTdXDUTQCLcBGAs/s1600/K-007.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="390" data-original-width="300" height="640" src="https://1.bp.blogspot.com/-Azl5XtK8rpc/WtWL-pHmG1I/AAAAAAAAAM8/RCWOQlFd3iMPCTG1_Pz5VJUW_HTdXDUTQCLcBGAs/s640/K-007.jpg" width="492" /></a></div>
+<a href="https://1.bp.blogspot.com/-Azl5XtK8rpc/WtWL-pHmG1I/AAAAAAAAAM8/RCWOQlFd3iMPCTG1_Pz5VJUW_HTdXDUTQCLcBGAs/s1600/K-007.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="390" data-original-width="300" height="640" src="https://1.bp.blogspot.com/-Azl5XtK8rpc/WtWL-pHmG1I/AAAAAAAAAM8/RCWOQlFd3iMPCTG1_Pz5VJUW_HTdXDUTQCLcBGAs/s640/K-007.jpg" width="90%" style="max-width: 492" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 <br /></div>
 <div class="separator" style="clear: both; text-align: center;">
@@ -98,7 +98,7 @@
 <br /></div>
 <br />
 <div class="separator" style="clear: both; text-align: center;">
-<a href="https://2.bp.blogspot.com/-LTGlx3XxPMc/WtWQxg5-idI/AAAAAAAAANc/_D74GVILS1ouNL425VYV_fZFtLW92sRwQCLcBGAs/s1600/K-008.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="632" data-original-width="948" height="426" src="https://2.bp.blogspot.com/-LTGlx3XxPMc/WtWQxg5-idI/AAAAAAAAANc/_D74GVILS1ouNL425VYV_fZFtLW92sRwQCLcBGAs/s640/K-008.jpg" width="640" /></a></div>
+<a href="https://2.bp.blogspot.com/-LTGlx3XxPMc/WtWQxg5-idI/AAAAAAAAANc/_D74GVILS1ouNL425VYV_fZFtLW92sRwQCLcBGAs/s1600/K-008.jpg" imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img border="0" data-original-height="632" data-original-width="948" height="426" src="https://2.bp.blogspot.com/-LTGlx3XxPMc/WtWQxg5-idI/AAAAAAAAANc/_D74GVILS1ouNL425VYV_fZFtLW92sRwQCLcBGAs/s640/K-008.jpg" width="90%" style="max-width: 640" /></a></div>
 <div class="separator" style="clear: both; text-align: center;">
 </div>
 <div class="separator" style="clear: both; text-align: center;">

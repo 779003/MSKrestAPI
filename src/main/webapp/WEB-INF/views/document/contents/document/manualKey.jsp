@@ -31,9 +31,9 @@
 			href="https://1.bp.blogspot.com/-Me-vI5u_jRo/Ws6rCJR6bJI/AAAAAAAAAKo/zEDty8Hi-h0PHlGKnGlV1MvbR807qE_MQCLcBGAs/s1600/guide_regApp1.jpg"
 			imageanchor="1" style="margin-left: 1em; margin-right: 1em;"><img
 			border="0" data-original-height="395" data-original-width="480"
-			height="328"
+			height="auto"
 			src="https://1.bp.blogspot.com/-Me-vI5u_jRo/Ws6rCJR6bJI/AAAAAAAAAKo/zEDty8Hi-h0PHlGKnGlV1MvbR807qE_MQCLcBGAs/s400/guide_regApp1.jpg"
-			width="400" /></a>
+			width="90%" style="max-width: 400" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		<br />
@@ -51,7 +51,7 @@
 			border="0" data-original-height="549" data-original-width="1600"
 			height="217"
 			src="https://1.bp.blogspot.com/-JNOF4qBPwss/Ws6rCfUTXUI/AAAAAAAAAKs/MEj5vFrw_GwIVDfyNrZAjpkXeiJ9cgG3ACLcBGAs/s640/guide_regApp2.jpg"
-			width="640" /></a>
+			width="90%" style="max-width: 640" /></a>
 	</div>
 	<br />
 	<div class="separator" style="clear: both; text-align: center;">
@@ -81,7 +81,7 @@
 			border="0" data-original-height="704" data-original-width="1600"
 			height="280"
 			src="https://4.bp.blogspot.com/-AFjyDv6UWbE/Ws6rCpV_CMI/AAAAAAAAAKw/rN7V3UdWrogvI-1wYK5YgqPCyzL_voZuACLcBGAs/s640/guide_regApp3.jpg"
-			width="640" /></a>
+			width="90%" style="max-width: 640" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		3. 애플리케이션 등록에 필요한 정보를 입력합니다.</div>
@@ -130,7 +130,7 @@
 			border="0" data-original-height="704" data-original-width="1600"
 			height="280"
 			src="https://4.bp.blogspot.com/-0EvdIUzwbjs/Ws6rCzV9Q8I/AAAAAAAAAK0/rbygxlJLbPYr_nQ0J71P56DcMkRow3GCwCLcBGAs/s640/guide_regApp4.jpg"
-			width="640" /></a>
+			width="90%" style="max-width: 640" /></a>
 	</div>
 	<div class="separator" style="clear: both; text-align: center;">
 		<br />

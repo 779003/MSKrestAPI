@@ -8,10 +8,10 @@
 		본 서비스는 처리 결과 및 장애에 대한 코드와 설명을 제공합니다.<br> 
 		아래 내용에서 확인하세요.
 	</p>
-	<table>
-	<colgroup width="84"></colgroup>
-	<colgroup width="263"></colgroup>
-	<colgroup width="1678"></colgroup>
+	<table style="width: 100%">
+	<colgroup style="max-width: 84"></colgroup>
+	<colgroup style="max-width: 263"></colgroup>
+	<colgroup style="max-width: 1678"></colgroup>
 	
 	<tr>
 		<td style="border-top: 2px solid #000000; border-bottom: 2px solid #000000; border-left: 2px solid #000000; border-right: 2px solid #000000" height="23" align="center" valign=middle bgcolor="#C6D9F1"><b><font face="DejaVu Sans" color="#000000">코드 번호</font></b></td>

@@ -120,7 +120,7 @@
         <div class="card-header">API 전체 로그</div>
         <div class="card-body">
           <div class="table-responsive">
-            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <table class="table table-bordered" id="dataTable" style="width: 100%">
               <thead>
                 <tr>   
                   <th style="white-space: nowrap">요청 시간</th>              

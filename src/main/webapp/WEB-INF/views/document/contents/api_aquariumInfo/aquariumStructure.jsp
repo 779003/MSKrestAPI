@@ -4,7 +4,7 @@
 <h2>수조관 정보 api 구조</h2>
 <div align="center">
 
-<table style="width: 100%" cellspacing="0" border="0">
+<table style="width: 100%">
 	<colgroup style="max-width:165"></colgroup>
 	<colgroup style="max-width:126"></colgroup>
 	<colgroup style="max-width:134"></colgroup>

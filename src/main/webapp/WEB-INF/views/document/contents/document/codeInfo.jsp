@@ -65,6 +65,11 @@
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=middle><font face="DejaVu Sans" color="#000000">잘못된 요청입니다.</font></td>
 	</tr>
 	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle sdval="404" sdnum="1033;"><font color="#000000">403</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font color="#000000">FORBIDDEN</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=middle><font face="DejaVu Sans" color="#000000">리소스에 액세스 할 수있는 권한이 없습니다. 액세스 권한이 필요하다면 관리자에게 문의해주세요.</font></td>
+	</tr>
+	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle sdval="404" sdnum="1033;"><font color="#000000">404</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font color="#000000">NOT_FOUND</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=middle><font face="DejaVu Sans" color="#000000">요청하신 페이지를 찾을 수 없습니다.</font></td>
@@ -108,6 +113,11 @@
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle sdval="2005" sdnum="1033;"><font color="#000000">2005</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font color="#000000">NO_APIKEY</font></td>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=middle><font face="DejaVu Sans" color="#000000">API KEY가 누락되었습니다. 헤더에 API KEY 정보가 포함되어야 합니다.</font></td>
+	</tr>
+	<tr>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle sdval="2005" sdnum="1033;"><font color="#000000">2006</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 1px solid #000000" align="center" valign=middle><font color="#000000">UNKNOWN_KEY</font></td>
+		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: 2px solid #000000" align="left" valign=middle><font face="DejaVu Sans" color="#000000">알 수 없는 API KEY입니다. API Key가 올바르게 입력이 되었는지 확인해주세요.</font></td>
 	</tr>
 	<tr>
 		<td style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 2px solid #000000; border-right: 1px solid #000000" height="22" align="center" valign=middle sdval="2999" sdnum="1033;"><font color="#000000">2999</font></td>

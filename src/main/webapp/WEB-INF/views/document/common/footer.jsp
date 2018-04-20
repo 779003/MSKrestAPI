@@ -4,7 +4,8 @@
 <footer class="sticky-footer">
 	<div class="container">
 		<div class="text-center">
-			<small>mskim backend service 2018 | 김민수 | 010-5714-1566 | 779003@naver.com</small>
+			<small>김민수 | 010-5714-1566 | 779003@naver.com | mskim backend service 2018</small>
+			
 		</div>
 	</div>
 </footer>

@@ -53,7 +53,7 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 		String apiSeq = "0";
 		int remainingViews = 0;
 		String requestMethod = request.getMethod();
-		String requestURL = request.getMethod() + "(" + request.getMethod() + ")";
+		String requestURL = request.getRequestURI() + "(" + request.getMethod() + ")";
 		
 		/* 1. API Key null 체크 */
 		if(apiKey == null){

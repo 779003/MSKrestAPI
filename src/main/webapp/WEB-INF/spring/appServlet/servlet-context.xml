@@ -35,14 +35,14 @@
 	<interceptors>
 		<interceptor>
 			<mapping path="/api/**"/>
-			<beans:bean id="LogInterceptor" class="com.mskim.backendservice.common.log.interceptor.LogInterceptor"/>
+			<beans:bean id="ApiInterceptor" class="com.mskim.backendservice.common.api.ApiInterceptor"/>
 		</interceptor>
 	</interceptors>
-	
+
 	<interceptors>
 		<interceptor>
 			<mapping path="/api/**"/>
-			<beans:bean id="ApiInterceptor" class="com.mskim.backendservice.common.api.ApiInterceptor"/>
+			<beans:bean id="LogInterceptor" class="com.mskim.backendservice.common.log.interceptor.LogInterceptor"/>
 		</interceptor>
 	</interceptors>
 	

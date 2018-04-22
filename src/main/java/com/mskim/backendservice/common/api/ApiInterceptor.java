@@ -11,6 +11,7 @@ import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.mskim.backendservice.aquarium.service.AquariumService;
+import com.mskim.backendservice.common.Version;
 import com.mskim.backendservice.fish.service.FishService;
 import com.mskim.backendservice.member.service.MemberService;
 import com.mskim.frontendService.apps.service.AppsService;
@@ -61,8 +62,11 @@ public class ApiInterceptor extends HandlerInterceptorAdapter {
 			return false;
 		}		
 		
-		/* 2. 버전 정보 null 체크 */
+		/* 2. 버전 정보 null, 유효 버전 체크 */
 		if (requestVersion == null) {
+			response.sendRedirect("/error/3001?api=" + apiSeq + "&url=" + requestURL);
+			return false;
+		}else if(Version.getVersionByString(requestVersion) == null) {
 			response.sendRedirect("/error/3001?api=" + apiSeq + "&url=" + requestURL);
 			return false;
 		}
